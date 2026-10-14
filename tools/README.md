@@ -71,6 +71,7 @@ Optional `team.yaml` supplies `cutter_initials` and `cite_style` defaults.
 python tools/inspect_docx.py file.docx            # outline + style/highlight statistics
 python tools/inspect_docx.py file.docx --cards    # cite line and highlighted text per card
 python tools/inspect_docx.py file.docx --json     # raw paragraphs and runs
+python tools/inspect_docx.py file.docx --text     # plain text, one paragraph per line (read an opposing case)
 ```
 
 Use it to learn how an existing file is formatted before matching it.

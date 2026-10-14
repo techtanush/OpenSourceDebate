@@ -1,0 +1,14 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests -v
+      - run: python tools/build_docx.py examples/example-cards.md -o /tmp/check.docx
+      - run: python tools/verify_quotes.py examples/example-cards.md --strict
+      - run: python tools/lint_cites.py examples/example-cards.md

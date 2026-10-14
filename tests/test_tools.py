@@ -121,3 +121,46 @@ class LintTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RepoStructureTests(unittest.TestCase):
+    def test_skills_have_front_matter(self):
+        import glob
+        skills = glob.glob(os.path.join(ROOT, "skills", "*", "SKILL.md"))
+        self.assertGreaterEqual(len(skills), 9)
+        for path in skills:
+            with open(path, encoding="utf-8") as f:
+                text = f.read()
+            self.assertTrue(text.startswith("---\nname: "), path)
+            head = text.split("---")[1]
+            self.assertIn('description: "', head, path)
+
+    def test_protocol_files_exist(self):
+        for rel in ("core/integrity.md", "core/cutting-rules.md", "core/cite-format.md",
+                    "speeches/case/PROTOCOL.md", "speeches/rebuttal/PROTOCOL.md",
+                    "speeches/frontlines/PROTOCOL.md", "speeches/blocks/PROTOCOL.md",
+                    "speeches/crossx/PROTOCOL.md", "speeches/summary-final/PROTOCOL.md",
+                    "speeches/prep/PROTOCOL.md", "AGENTS.md"):
+            self.assertTrue(os.path.exists(os.path.join(ROOT, rel)), rel)
+
+    def test_all_docx_parts_wellformed(self):
+        import glob
+        import zipfile
+        import xml.dom.minidom
+        files = glob.glob(os.path.join(ROOT, "templates", "*.docx")) + \
+            glob.glob(os.path.join(ROOT, "examples", "*.docx"))
+        self.assertTrue(files)
+        for path in files:
+            with zipfile.ZipFile(path) as z:
+                for name in z.namelist():
+                    xml.dom.minidom.parseString(z.read(name))
+
+    def test_text_extraction(self):
+        import io
+        import contextlib
+        buf = io.StringIO()
+        out = os.path.join(tempfile.mkdtemp(), "t.docx")
+        build_docx.write_docx(build_docx.load_spec(EXAMPLE_MD), out)
+        with contextlib.redirect_stdout(buf):
+            inspect_docx.main([out, "--text"])
+        self.assertIn("Foot traffic rose", buf.getvalue())

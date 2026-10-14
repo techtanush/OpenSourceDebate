@@ -5,6 +5,7 @@ Usage:
     python tools/inspect_docx.py file.docx            # outline + stats
     python tools/inspect_docx.py file.docx --cards    # cite lines + highlighted text per card
     python tools/inspect_docx.py file.docx --json     # machine-readable paragraphs
+    python tools/inspect_docx.py file.docx --text     # plain text, one paragraph per line
 
 Use it to learn how a team formats its files before cutting new cards.
 """
@@ -120,8 +121,16 @@ def main(argv=None):
     ap.add_argument("docx")
     ap.add_argument("--cards", action="store_true")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--text", action="store_true",
+                    help="plain text, one paragraph per line (e.g. to read an opposing case)")
     args = ap.parse_args(argv)
     paras = read_paragraphs(args.docx)
+    if args.text:
+        for p in paras:
+            line = para_text(p)
+            if line.strip():
+                print(line)
+        return 0
     if args.json:
         json.dump(paras, sys.stdout, indent=1)
         return 0

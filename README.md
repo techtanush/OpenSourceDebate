@@ -63,6 +63,10 @@ research  ->  save full text  ->  cut card spec  ->  build .docx
                   deliver cards + "Before you read these" caveats
 ```
 
+## Checking it works
+
+`docs/agent-smoke-test.md` has a hand test for a fresh agent session and a checklist for opening the .docx in Word.
+
 ## Principles
 
 1. **Never fabricate.** Quotes are verbatim. Unverified quotes are labeled.
