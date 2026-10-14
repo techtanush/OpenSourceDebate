@@ -1,0 +1,6 @@
+team.yaml
+private-fixtures/
+sources/
+*.pyc
+__pycache__/
+.DS_Store

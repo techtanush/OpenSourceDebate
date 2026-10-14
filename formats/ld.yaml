@@ -1,0 +1,19 @@
+# Lincoln-Douglas (one-on-one). Times are common defaults; check your league's rules.
+name: ld
+wpm_default: 250
+cross_ex: true
+speeches:
+  - {id: AC, side: aff, role: constructive, minutes: 6}
+  - {id: CX-NC, role: cross-ex, minutes: 3, asker: neg}
+  - {id: NC, side: neg, role: constructive, minutes: 7}
+  - {id: CX-1AR, role: cross-ex, minutes: 3, asker: aff}
+  - {id: 1AR, side: aff, role: rebuttal-1, minutes: 4}
+  - {id: NR, side: neg, role: summary, minutes: 6}
+  - {id: 2AR, side: aff, role: summary, minutes: 3}
+prep_minutes_per_side: 4
+evidence_expected: true
+framework_expected: true      # value / criterion or equivalent weighing mechanism
+new_arguments_allowed_in: [constructive, rebuttal-1]
+notes: >
+  LD cases usually pair a framework (what to weigh) with contentions. Frontlines
+  and blocks should cover both framework and contention-level responses.

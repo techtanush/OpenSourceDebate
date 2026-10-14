@@ -1,0 +1,23 @@
+# Public Forum (two-person teams). Times are common defaults; check your league's rules.
+name: pf
+wpm_default: 220
+cross_ex: true                # called "crossfire"
+speeches:
+  - {id: Constructive-A, side: pro, role: constructive, minutes: 4}
+  - {id: Constructive-B, side: con, role: constructive, minutes: 4}
+  - {id: Crossfire-1, role: cross-ex, minutes: 3}
+  - {id: Rebuttal-A, side: pro, role: rebuttal-1, minutes: 4}
+  - {id: Rebuttal-B, side: con, role: rebuttal-1, minutes: 4}
+  - {id: Crossfire-2, role: cross-ex, minutes: 3}
+  - {id: Summary-A, side: pro, role: summary, minutes: 3}
+  - {id: Summary-B, side: con, role: summary, minutes: 3}
+  - {id: Grand-Crossfire, role: cross-ex, minutes: 3}
+  - {id: Final-Focus-A, side: pro, role: summary, minutes: 2}
+  - {id: Final-Focus-B, side: con, role: summary, minutes: 2}
+prep_minutes_per_side: 3
+evidence_expected: true
+new_arguments_allowed_in: [constructive, rebuttal-1]
+notes: >
+  PF is judged by lay and flow judges; keep language clear. Evidence must be
+  accurate and reproducible when called for. Many leagues require sharing the
+  full text of cards on request, so keep the saved source files.

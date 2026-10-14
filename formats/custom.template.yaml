@@ -1,0 +1,17 @@
+# Copy this file to formats/<yourformat>.yaml and edit it.
+# Agents read this to know the speech order, times, and rules for your league.
+name: my-format
+wpm_default: 250
+cross_ex: true
+speeches:
+  # id: your name for the speech
+  # side: aff | neg | pro | con (omit for cross-ex)
+  # role: constructive | rebuttal-1 | rebuttal-2 | summary | cross-ex
+  - {id: Speech1, side: aff, role: constructive, minutes: 6}
+  - {id: Speech2, side: neg, role: constructive, minutes: 6}
+prep_minutes_per_side: 5
+evidence_expected: true
+new_arguments_allowed_in: [constructive]
+notes: >
+  Anything an agent should know about your league: judging style, evidence
+  rules, how files are shared, local conventions.

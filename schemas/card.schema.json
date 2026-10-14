@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Debate card spec (JSON form accepted by tools/build_docx.py)",
+  "type": "object",
+  "required": ["items"],
+  "properties": {
+    "defaults": {"type": "object", "properties": {"cite": {"$ref": "#/$defs/cite"}}},
+    "items": {"type": "array", "items": {"oneOf": [
+      {"type": "object", "required": ["type", "text"],
+       "properties": {"type": {"enum": ["pocket", "hat", "block", "tag", "analytic", "undertag", "text"]}, "text": {"type": "string"}}},
+      {"type": "object", "required": ["type", "tag", "cite", "body"],
+       "properties": {"type": {"const": "card"}, "tag": {"type": "string"}, "cite": {"$ref": "#/$defs/cite"},
+         "body": {"description": "Markup string (==read==, __underline__, plain=unread) or a list of runs",
+                  "oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "object", "required": ["text"],
+                    "properties": {"text": {"type": "string"}, "mode": {"enum": ["read", "underline", "unread"]}}}}]}}}
+    ]}}
+  },
+  "$defs": {"cite": {"type": "object", "properties": {
+    "name": {"type": "string", "description": "Short cite, e.g. 'Reyes 25'"},
+    "author": {"type": "string"}, "quals": {"type": "string"}, "date": {"type": "string"},
+    "title": {"type": "string"}, "publication": {"type": "string"}, "url": {"type": "string"},
+    "doa": {"type": "string"}, "initials": {"type": "string"},
+    "style": {"enum": ["frontline", "case"]}, "raw": {"type": "string"}, "source": {"type": "string"}}}}
+}

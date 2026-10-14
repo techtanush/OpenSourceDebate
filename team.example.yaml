@@ -1,0 +1,5 @@
+# Copy to team.yaml (gitignored) and edit. Only flat "key: value" lines are read by the tools.
+cutter_initials: AB          # appears in the cite tail of every card you cut
+cite_style: frontline        # frontline = [bracketed] cite, case = (parenthesized) cite
+format: policy               # which file in formats/ you debate in
+wpm: 250                     # your typical reading speed
