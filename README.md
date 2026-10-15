@@ -1,5 +1,7 @@
 # Open Source Debate
 
+> **New here? Start with [`00-READ-THIS-FIRST/`](00-READ-THIS-FIRST/README.md).** It explains the repo, the reading order, and the examples in order.
+
 A toolkit that teaches an AI coding agent (**Claude Code**, **Codex**, or similar) how to do debate prep properly: research evidence, cut cards, and write cases, rebuttals, frontlines, blocks, and cross-ex, in the standard **Verbatim** Word format.
 
 There is **no AI API and no key** in this repo. Your own agent does the searching and thinking. This repo provides what it needs to do the job right: the protocols, the file format, the integrity rules, and a few small tools that check its work.

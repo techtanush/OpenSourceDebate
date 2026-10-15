@@ -4,6 +4,8 @@ You are helping a debater research, cut cards, and write files. This repo gives 
 
 ## Always do this first
 
+0. If this is your first time in the repo, read `00-READ-THIS-FIRST/README.md` and follow `00-READ-THIS-FIRST/reading-order.md`.
+
 1. Read `core/integrity.md`. **Never fabricate or paraphrase inside a quote. Never present a snippet or summary as the source text.**
 2. If `team.yaml` exists, read it (cutter initials, cite style, format, wpm). If not, ask the user or use `team.example.yaml` defaults and say so.
 3. Read the format file named in `team.yaml` (`formats/<format>.yaml`) to learn speech names, times, and rules.

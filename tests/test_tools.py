@@ -217,3 +217,28 @@ class LintCardsAndBlocksTests(unittest.TestCase):
         runs = [r for _, _, body in inspect_docx.card_groups(paras) for b in body for r in b["runs"]]
         self.assertTrue(any(r["b"] for r in runs))
         self.assertFalse(any(r["highlight"] for r in runs))
+
+
+class ReadFirstFolderTests(unittest.TestCase):
+    def test_paths_mentioned_in_read_first_exist(self):
+        import glob
+        import re
+        generated = {"out.docx", "out-DRAFT.docx", "team.yaml", "file.md", "file.docx", "spec.md", "sources/"}
+        folder = os.path.join(ROOT, "00-READ-THIS-FIRST")
+        files = glob.glob(os.path.join(folder, "*.md"))
+        self.assertGreaterEqual(len(files), 3)
+        for path in files:
+            with open(path, encoding="utf-8") as f:
+                text = f.read()
+            for ref in re.findall(r"`([A-Za-z0-9_./-]+(?:\.md|\.docx|\.txt|\.py|\.yaml|\.pdf|/))`", text):
+                if ref in generated or ref.startswith("<") or "<" in ref:
+                    continue
+                if ref.startswith(("out", "my-prep")):
+                    continue
+                candidates = [os.path.join(ROOT, ref), os.path.join(folder, ref),
+                              os.path.join(ROOT, "speeches", ref),
+                              os.path.join(ROOT, "templates", ref),
+                              os.path.join(ROOT, "tools", ref),
+                              os.path.join(ROOT, "examples", ref)]
+                self.assertTrue(any(os.path.exists(c) for c in candidates),
+                                "%s mentions missing path %s" % (os.path.basename(path), ref))
