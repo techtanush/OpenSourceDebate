@@ -235,10 +235,14 @@ class ReadFirstFolderTests(unittest.TestCase):
                     continue
                 if ref.startswith(("out", "my-prep")):
                     continue
-                candidates = [os.path.join(ROOT, ref), os.path.join(folder, ref),
-                              os.path.join(ROOT, "speeches", ref),
-                              os.path.join(ROOT, "templates", ref),
-                              os.path.join(ROOT, "tools", ref),
-                              os.path.join(ROOT, "examples", ref)]
-                self.assertTrue(any(os.path.exists(c) for c in candidates),
-                                "%s mentions missing path %s" % (os.path.basename(path), ref))
+                if "/" in ref.rstrip("/"):
+                    found = os.path.exists(os.path.join(ROOT, ref)) or \
+                        os.path.exists(os.path.join(folder, ref)) or \
+                        os.path.exists(os.path.join(ROOT, "speeches", ref))
+                else:  # bare name: any file or folder with that name somewhere in the repo
+                    name = ref.rstrip("/")
+                    found = any(name in files or name in dirs
+                                for _, dirs, files in os.walk(ROOT)
+                                if ".git" not in _)
+                self.assertTrue(found, "%s mentions missing path %s" %
+                                (os.path.basename(path), ref))
