@@ -81,6 +81,11 @@ def run(text, mode):
                '<w:sz w:val="16"/><w:szCs w:val="16"/>')
     elif mode == "plain":
         rpr = ""
+    elif mode == "draft_read":
+        # draft mode: proposed read text is bold + underlined, no highlight, for the debater to cut
+        rpr = '<w:rStyle w:val="StyleUnderline"/><w:b/><w:bCs/>'
+    elif mode == "draft_unread":
+        rpr = ""
     else:
         raise ValueError("unknown run mode: %s" % mode)
     rpr_xml = "<w:rPr>%s</w:rPr>" % rpr if rpr else ""
@@ -204,7 +209,11 @@ def render_item(item, defaults):
         body_paras = item.get("body_paragraphs")
         if body_paras is None:
             body_paras = [body_runs(item)]
+        draft = defaults.get("_draft", False)
         for runs in body_paras:
+            if draft:
+                runs = [(t, {"read": "draft_read", "unread": "draft_unread"}.get(m, m))
+                        for t, m in runs]
             parts.append(para("".join(run(t, m) for t, m in runs)))
         return "".join(parts)
     raise ValueError("unknown item type: %r" % kind)
@@ -217,7 +226,12 @@ def build_document_xml(spec):
             '<w:document %s><w:body>%s%s</w:body></w:document>' % (NS, body, SECT))
 
 
-def write_docx(spec, out_path):
+def write_docx(spec, out_path, draft=False):
+    """Write the .docx. draft=True makes a cutting copy: proposed read text is bold and
+    underlined (no highlight) and surrounding context stays at normal size, so the
+    debater can cut it in an editor. The default (final) uses highlight + 8pt unread."""
+    spec = dict(spec)
+    spec["defaults"] = dict(spec.get("defaults", {}), _draft=draft)
     with open(STYLES_PATH, "r", encoding="utf-8") as f:
         styles = f.read()
     doc = build_document_xml(spec)
@@ -320,9 +334,11 @@ def main(argv=None):
     p.add_argument("spec", help="spec file (.json or .md)")
     p.add_argument("-o", "--out", required=True, help="output .docx path")
     p.add_argument("--team", default="team.yaml", help="optional team config")
+    p.add_argument("--draft", action="store_true",
+                   help="cutting copy: proposed read text bold+underlined, context at normal size")
     args = p.parse_args(argv)
     spec = load_spec(args.spec, args.team)
-    write_docx(spec, args.out)
+    write_docx(spec, args.out, draft=args.draft)
     print("wrote %s (%d items)" % (args.out, len(spec["items"])))
     return 0
 

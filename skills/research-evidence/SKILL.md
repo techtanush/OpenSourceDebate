@@ -21,6 +21,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 4. Rate each source (`core/source-evaluation.md`) and pick the best passage.
 5. Cut and verify cards (see the cut-card skill). Report UNVERIFIED items and weak sources.
 
+## Card quality
+
+Cards need context around the read text and sparse highlighting (see `core/cutting-rules.md`); run `python tools/lint_cards.py` and `python tools/lint_blocks.py`, and fix every flag. Blocks and frontlines hold the actual cut cards, never analytics that merely mention a card in another file. Read `docs/what-good-looks-like.md`.
+
 ## Finish with
 
 A short "Before you read these" list: UNVERIFIED quotes, biased or weak sources, missing credentials or dates, and highlighting an opponent could attack.

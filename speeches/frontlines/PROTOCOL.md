@@ -18,6 +18,7 @@ Read first: `core/integrity.md`, `core/cutting-rules.md`.
 
 ```
 Block (Heading 3):   "C1 - [Response being answered]"
+Analytic:            "<Opponent> Argument: <their response, stated fairly>"
 Tag (Heading 4):     the answer in one sentence
 Card or Analytic:    new evidence, or a short extension of a constructive card
 ```
@@ -25,6 +26,12 @@ Card or Analytic:    new evidence, or a short extension of a constructive card
 4. **Order the answers** by how directly they deal with the response: usually (a) no-link or non-unique, (b) your best card, (c) a turn if you have one, (d) a weighing line.
 5. **Mark extension vs. new evidence.** New evidence is allowed in frontlines, and research it with `core/research-protocol.md`.
 6. **Add a "terminal defense" line** at the end of each block (a one-sentence claim that stands if everything else is dropped).
+
+## Extend vs. new card
+
+- **Extend** (short analytic) only for a card the user **actually read** in their constructive. If you were not given the case text, you do not know what was read: ask, or cut a fresh card instead of guessing.
+- **Every other answer is a full card**, cut with context before and after (`core/cutting-rules.md`; check with `tools/lint_cards.py`). Never replace a card with an analytic summary of it.
+- Aim for 2-4 answers per opposing response, each with its own card, because a frontline that is one thin card per response cannot survive a follow-up.
 
 ## Rules specific to frontlines
 
@@ -49,6 +56,7 @@ Build with `tools/build_docx.py`. Check read time with `tools/speech_timer.py`.
 
 - [ ] Every contention has at least its top three likely responses answered.
 - [ ] Constructive cards appear only as Extend analytics.
-- [ ] New cards verified with `tools/verify_quotes.py` and `lint_cites.py`.
+- [ ] New cards verified with `tools/verify_quotes.py` and `lint_cites.py`, and properly cut with context (`tools/lint_cards.py`).
+- [ ] Each block opens with the opponent's response stated fairly and holds the actual cut cards (`python tools/lint_blocks.py file`).
 - [ ] Each block has a one-line "if dropped" claim.
 - [ ] Unverified quotes or weak sources are flagged.

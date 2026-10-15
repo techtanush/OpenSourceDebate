@@ -34,6 +34,14 @@ One paragraph (or a few, if the source has paragraph breaks you keep), made of t
 
 Rules for choosing what to mark are in `cutting-rules.md`.
 
+## Card note (optional Analytic after the card)
+
+One or two sentences, in an Analytic paragraph after the card, giving the **background of the source** in plain words: what kind of study or report it is, sample size or scope, who funded it, and its main weakness. This helps the debater decide when to read it and how to answer attacks. It is your explanation, not part of the card body, so it never goes inside the quote.
+
+## Blocks and frontlines hold full cards
+
+A block or frontline file is a document the debater reads from during the round, so **every answer carries its own fully cut card** (tag, cite, body with context). Do not write "Extend [Card]" for a card that has not been read in a speech. "Extend" is only for cards the debater already read in an earlier speech in the same round (see `speeches/frontlines/PROTOCOL.md`).
+
 ## Document hierarchy (navigation pane)
 
 | Level | Verbatim name | Used for | Look |

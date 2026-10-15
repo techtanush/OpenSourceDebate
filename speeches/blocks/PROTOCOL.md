@@ -23,18 +23,31 @@ Read first: `core/integrity.md`, `core/cutting-rules.md`, `core/research-protoco
 5. **Order** answers from strongest to weakest so you can read the first N that fit the time.
 6. **Write the "if they say..." follow-ups** for the most likely replies.
 
-## File shape
+## Block anatomy (follow this)
+
+This is the structure used in the example blocks in `reference/example-blocks/`. A block is read from during the round, so it is **self-contained**: it states the argument, gives the answers, and **contains the actual cut cards**.
 
 ```
-Block   : "A2: <Argument>"
-  Analytic : one-line summary of the answer package
-  Tag      : "1. <answer sentence>"
-  Card(s)  : evidence (verified)
-  Analytic : why it wins / how to weigh it
-  Tag      : "2. <answer>"
-  ...
-  Analytic : "If they say X, say Y."
+Block (Heading 3)   "AT: <opposing argument>"
+Analytic            "<Opponent> Argument: <fair one-sentence statement of what they say>"
+Analytic            "1. <overview answer: the strongest short claim, often an empirical or no-link point>"
+Tag + cite + card   "2. <answer as a full argument sentence with its specifics>"
+Tag + cite + card   "3. <next answer>"
+  ... (2-5 cards, strongest first)
+Analytic            "N. <closing link: why the resolution/plan does or doesn't cause their claim, or a TURN>"
 ```
+
+Rules:
+
+1. **Open with the opposing argument**, stated the way they would say it ("Aff Argument: ...", "Neg Argument: ...").
+2. **Every tagged answer has its own card.** Tag (the answer as a specific argument sentence), then the cite, then the card body with its surrounding context and sparse read text (`core/cutting-rules.md`). A Tag with no card under it is an error.
+3. **Analytics sit between and around cards. They never replace them.** Do not write "Extend X" or summarize a card that lives in another file. "Extend" is only for a card the debater already read in an earlier speech.
+4. **Number the answers** across tags and analytics (1, 2, 3...), so the speaker can say "number three."
+5. **Close with an analytic** that ties the block back to the resolution or turns the argument.
+6. **Add a source note** (Analytic) only where the source has a weakness the debater must be ready to answer.
+7. Check with `python tools/lint_blocks.py file` (structure) and `python tools/lint_cards.py file` (cards cut too thin).
+
+A starter file is in `templates/block-skeleton.md`; a worked fictional example is `examples/example-cards.md`.
 
 ## Good blocks
 
@@ -56,6 +69,7 @@ Block   : "A2: <Argument>"
 
 - [ ] Opposing argument stated fairly at the top.
 - [ ] Answers ordered strongest first, each with a reason.
-- [ ] All cards verified (`verify_quotes.py`), cites complete (`lint_cites.py`).
+- [ ] All cards verified (`verify_quotes.py`), cites complete (`lint_cites.py`), context present (`lint_cards.py`).
+- [ ] Every numbered answer contains its own cut card (no card-less answers, no "Extend" for unread cards).
 - [ ] Block fits its time (`speech_timer.py`).
 - [ ] Unverified items flagged.

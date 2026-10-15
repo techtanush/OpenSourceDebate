@@ -16,7 +16,9 @@ There is **no AI API and no key** in this repo. Your own agent does the searchin
 | `skills/` | Claude Code skills that wrap the protocols (cut-card, research-evidence, build-case, write-rebuttal, build-frontlines, make-blocks, crossx-questions, verify-card, import-team-files) |
 | `tools/` | Python (standard library only): build `.docx`, inspect existing files, verify quotes, lint cites, time speeches |
 | `templates/` | Blank starter `.docx` files (case, blocks, frontlines) with the Verbatim styles |
-| `examples/` | A small fictional example: source article, card spec, generated `.docx` |
+| `examples/` | A small fictional example: source article, card spec, generated `.docx` (final and `-DRAFT` cutting copy) |
+| `docs/` | `what-good-looks-like.md` (block anatomy from real files) and the agent smoke test |
+| `reference/` | **Private-repo only:** real example blocks and real opposing files for studying structure. Delete before making the repo public. |
 
 ## Disclaimer about formatting
 

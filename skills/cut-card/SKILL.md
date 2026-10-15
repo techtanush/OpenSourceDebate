@@ -22,6 +22,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 4. Verify: `python tools/verify_quotes.py cards.md --strict` and `python tools/lint_cites.py cards.md`.
 5. Reply with the cards and a short "Before you read these" list.
 
+## Card quality
+
+Cards need context around the read text and sparse highlighting (see `core/cutting-rules.md`); run `python tools/lint_cards.py` and `python tools/lint_blocks.py`, and fix every flag. Blocks and frontlines hold the actual cut cards, never analytics that merely mention a card in another file. Read `docs/what-good-looks-like.md`.
+
 ## Delivering files
 
 Tell the user the formatting and highlighting only appear when the .docx is opened in an editor that supports Verbatim-style formatting (such as CardMirror or Verbatim in Word).

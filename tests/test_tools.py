@@ -58,7 +58,7 @@ class DocxRoundTripTests(unittest.TestCase):
 
     def test_cite_name_uses_cite_style(self):
         groups = list(inspect_docx.card_groups(self.paras))
-        self.assertEqual(len(groups), 2)
+        self.assertEqual(len(groups), 4)
         first_run = groups[0][1]["runs"][0]
         self.assertEqual(first_run["rstyle"], "Style13ptBold")
 
@@ -173,3 +173,47 @@ class DocsTests(unittest.TestCase):
                 text = f.read()
             self.assertIn("CardMirror", text, rel)
             self.assertIn("support", text, rel)
+
+
+class LintCardsAndBlocksTests(unittest.TestCase):
+    def test_thin_card_flagged(self):
+        import lint_cards
+        runs = [("A single sentence that is entirely read aloud by the speaker here.", "read")]
+        probs = lint_cards.problems_for(lint_cards.measure(runs), "block")
+        self.assertTrue(probs)
+
+    def test_context_card_passes(self):
+        import lint_cards
+        runs = [("Setup text before the point. " * 4, "unread"),
+                ("The key claim read aloud.", "read"),
+                ("Qualification and next sentence after. " * 4, "unread")]
+        self.assertEqual(lint_cards.problems_for(lint_cards.measure(runs), "block"), [])
+
+    def test_example_blocks_pass(self):
+        import lint_blocks
+        results, n = lint_blocks.lint(lint_blocks.events_from_spec(EXAMPLE_MD))
+        self.assertEqual(n, 2)
+        self.assertEqual([r for r in results if r[0] == "ERROR"], [])
+
+    def test_cardless_block_fails(self):
+        import lint_blocks
+        events = [("block", "A2: X"), ("analytic", "Neg Argument: X is bad."),
+                  ("analytic", "1. Extend Smith 25: it says things."), ("tag", "2. Answer")]
+        results, _ = lint_blocks.lint(events)
+        levels = [(r[0], r[2]) for r in results]
+        self.assertTrue(any("no cut cards" in m for _, m in levels))
+        self.assertTrue(any("tag with no card" in m for _, m in levels))
+
+    def test_missing_argument_statement_fails(self):
+        import lint_blocks
+        events = [("block", "A2: X"), ("card", "1. Answer"), ("analytic", "2. Closing.")]
+        results, _ = lint_blocks.lint(events)
+        self.assertTrue(any("opposing argument" in r[2] for r in results))
+
+    def test_draft_mode_bolds_read_text(self):
+        out = os.path.join(tempfile.mkdtemp(), "d.docx")
+        build_docx.write_docx(build_docx.load_spec(EXAMPLE_MD), out, draft=True)
+        paras = inspect_docx.read_paragraphs(out)
+        runs = [r for _, _, body in inspect_docx.card_groups(paras) for b in body for r in b["runs"]]
+        self.assertTrue(any(r["b"] for r in runs))
+        self.assertFalse(any(r["highlight"] for r in runs))

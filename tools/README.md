@@ -63,6 +63,8 @@ Context __underlined, not read__ and ==read aloud (highlight + underline)== more
 
 Item types: `pocket`, `hat`, `block`, `tag`, `card`, `analytic`, `undertag`, `text`.
 
+Add `--draft` to build a **cutting copy**: proposed read text is bold and underlined (no highlight) and the surrounding context stays at normal size, so you can finish cutting in your editor. The default is the final format (cyan highlight, 8pt unread).
+
 Optional `team.yaml` supplies `cutter_initials` and `cite_style` defaults.
 
 ## inspect_docx.py
@@ -93,6 +95,22 @@ python tools/lint_cites.py spec.md
 ```
 
 Flags missing name, author, quals, date, title, URL, DOA, or initials, and short cites that don't look like `Lastname 25`.
+
+## lint_blocks.py
+
+```bash
+python tools/lint_blocks.py spec.md      # or: python tools/lint_blocks.py file.docx
+```
+
+Checks every Block (Heading 3): it must contain actual cut cards, every Tag must have a card under it, and it must open with a statement of the opposing argument ("Aff Argument: ...") before the answers. Warns on fewer than two answers or no closing analytic. Exit 1 on any error. Block anatomy: `speeches/blocks/PROTOCOL.md`.
+
+## lint_cards.py
+
+```bash
+python tools/lint_cards.py spec.md      # or: python tools/lint_cards.py file.docx
+```
+
+Flags cards that are cut too thin. The default `block` profile catches only the extremes (a lone sentence, a card that is entirely highlighted, or no unread context on either side); `--profile case` is stricter for long constructive cards. Calibrated on real team files. A warning, not a quality score. Exit 1 if any card is flagged.
 
 ## speech_timer.py
 

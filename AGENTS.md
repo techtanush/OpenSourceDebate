@@ -13,7 +13,7 @@ You are helping a debater research, cut cards, and write files. This repo gives 
 
 | The user wants to... | Read these | Use these tools |
 |----------------------|-----------|-----------------|
-| Cut one or more cards | `core/cutting-rules.md`, `core/card-anatomy.md`, `core/cite-format.md` | `build_docx.py`, `verify_quotes.py`, `lint_cites.py` |
+| Cut one or more cards | `core/cutting-rules.md`, `core/card-anatomy.md`, `core/cite-format.md`, `docs/what-good-looks-like.md` | `build_docx.py`, `verify_quotes.py`, `lint_cites.py`, `lint_cards.py` |
 | Research evidence on a claim | `core/research-protocol.md`, `core/source-evaluation.md` | `verify_quotes.py` |
 | Write a constructive case | `speeches/case/PROTOCOL.md` | `build_docx.py`, `speech_timer.py` |
 | Write a rebuttal against a case | `speeches/rebuttal/PROTOCOL.md` | `speech_timer.py` |
@@ -34,6 +34,8 @@ python tools/build_docx.py spec.md -o out.docx      # Markdown/JSON spec -> Verb
 python tools/inspect_docx.py file.docx [--cards]    # outline, cites, highlight stats
 python tools/verify_quotes.py spec.md [--strict]    # body text must be verbatim from the saved source
 python tools/lint_cites.py spec.md                  # missing/malformed cite fields
+python tools/lint_cards.py spec.md                  # cards cut too thin? (also works on .docx; --profile case)
+python tools/lint_blocks.py spec.md                 # blocks complete? argument stated, real cards, closing analytic
 python tools/speech_timer.py file --wpm 250         # reading time (docx counts highlighted text only)
 python -m unittest discover -s tests                # run the tests
 ```
@@ -47,7 +49,9 @@ The formatting and highlighting in generated `.docx` files only appear when the 
 ## Working rules
 
 - **Save sources.** Put the full text of every article in `sources/<shortcite>.txt` and set `source:` on the card. `sources/` is gitignored.
-- **Verify before delivering.** Run `verify_quotes.py` and `lint_cites.py`. Report failures plainly.
+- **Verify before delivering.** Run `verify_quotes.py`, `lint_cites.py`, `lint_cards.py`, and (for blocks/frontlines) `lint_blocks.py`. Report failures plainly and fix them.
+- **Cut real cards, and put them in the file.** Each card has context around the read text, and only a sparse part is read. Blocks and frontlines hold the actual cards, never analytics that merely mention a card in another file. Follow the block anatomy in `speeches/blocks/PROTOCOL.md` and see `docs/what-good-looks-like.md`.
+- **Offer a cutting copy.** If the user will finish the highlighting themselves, also build with `--draft` (proposed read text in bold, context at normal size).
 - **Report caveats.** End every evidence task with a short "Before you read these" list: UNVERIFIED quotes, biased or weak sources, missing credentials, attackable highlighting.
 - **Respect the user's files.** Read their existing files only to learn style or to reuse their own cards. Do not publish or copy them elsewhere.
 - **Ask before outward actions** (publishing, emailing, pushing). Reading and writing local files is fine.
