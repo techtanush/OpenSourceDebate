@@ -18,6 +18,12 @@ There is **no AI API and no key** in this repo. Your own agent does the searchin
 | `templates/` | Blank starter `.docx` files (case, blocks, frontlines) with the Verbatim styles |
 | `examples/` | A small fictional example: source article, card spec, generated `.docx` |
 
+## You need CardMirror (or Verbatim) to view the files
+
+The `.docx` files carry their formatting in Word styles (Pocket/Hat/Block/Tag, cite, highlight, unread text). **Open them in [CardMirror](https://cardmirror.app/)**, the free Verbatim-compatible editor, or in Microsoft Word with Verbatim. TextEdit, Quick Look, and Pages won't show the formatting.
+
+Full install steps for macOS, Windows, Linux, and the web app are in [docs/CARDMIRROR.md](docs/CARDMIRROR.md).
+
 ## Quick start
 
 ```bash
@@ -51,7 +57,7 @@ python tools/inspect_docx.py out.docx --cards
 python tools/speech_timer.py out.docx --wpm 250
 ```
 
-Open `out.docx` in Word to see the Pocket/Hat/Block/Tag hierarchy, cite lines, cyan highlights, and 8pt unread text.
+Open `out.docx` in **CardMirror** (see [docs/CARDMIRROR.md](docs/CARDMIRROR.md)) to see the Pocket/Hat/Block/Tag hierarchy, cite lines, cyan highlights, and 8pt unread text.
 
 ## The workflow in one picture
 
@@ -65,7 +71,7 @@ research  ->  save full text  ->  cut card spec  ->  build .docx
 
 ## Checking it works
 
-`docs/agent-smoke-test.md` has a hand test for a fresh agent session and a checklist for opening the .docx in Word.
+`docs/agent-smoke-test.md` has a hand test for a fresh agent session and a checklist for opening the .docx in CardMirror.
 
 ## Principles
 

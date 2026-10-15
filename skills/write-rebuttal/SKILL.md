@@ -19,6 +19,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 3. Write overview, line-by-line, and weighing. Extend your own earlier cards as short analytics.
 4. Time it with `tools/speech_timer.py`. Flag unverified quotes.
 
+## Delivering files
+
+Tell the user the .docx must be opened in CardMirror or Verbatim (Word) to show its formatting; install steps are in `docs/CARDMIRROR.md`.
+
 ## Finish with
 
 A short "Before you read these" list: UNVERIFIED quotes, biased or weak sources, missing credentials or dates, and highlighting an opponent could attack.

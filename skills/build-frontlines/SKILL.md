@@ -20,6 +20,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 3. Never re-paste constructive cards; write `Extend [Card] from our constructive: ...`.
 4. New evidence is allowed: research and verify it. Build the file and report caveats.
 
+## Delivering files
+
+Tell the user the .docx must be opened in CardMirror or Verbatim (Word) to show its formatting; install steps are in `docs/CARDMIRROR.md`.
+
 ## Finish with
 
 A short "Before you read these" list: UNVERIFIED quotes, biased or weak sources, missing credentials or dates, and highlighting an opponent could attack.

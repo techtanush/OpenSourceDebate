@@ -22,6 +22,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 4. Verify: `python tools/verify_quotes.py cards.md --strict` and `python tools/lint_cites.py cards.md`.
 5. Reply with the cards and a short "Before you read these" list.
 
+## Delivering files
+
+Tell the user the .docx must be opened in CardMirror or Verbatim (Word) to show its formatting; install steps are in `docs/CARDMIRROR.md`.
+
 ## Finish with
 
 A short "Before you read these" list: UNVERIFIED quotes, biased or weak sources, missing credentials or dates, and highlighting an opponent could attack.

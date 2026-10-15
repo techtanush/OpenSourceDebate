@@ -40,6 +40,10 @@ python -m unittest discover -s tests                # run the tests
 
 See `tools/README.md` for the spec syntax and `examples/` for a complete fictional example.
 
+## Viewing the output
+
+Generated `.docx` files must be opened in **CardMirror** or Verbatim (Word) to show their formatting. Tell the user this whenever you deliver a file, point them to `docs/CARDMIRROR.md` for install steps, and never judge formatting from a TextEdit, Quick Look, or Pages preview. To check formatting yourself, use `python tools/inspect_docx.py file.docx` (it reads the real styles).
+
 ## Working rules
 
 - **Save sources.** Put the full text of every article in `sources/<shortcite>.txt` and set `source:` on the card. `sources/` is gitignored.

@@ -164,3 +164,11 @@ class RepoStructureTests(unittest.TestCase):
         with contextlib.redirect_stdout(buf):
             inspect_docx.main([out, "--text"])
         self.assertIn("Foot traffic rose", buf.getvalue())
+
+
+class DocsTests(unittest.TestCase):
+    def test_cardmirror_docs_linked(self):
+        for rel in ("README.md", "AGENTS.md"):
+            with open(os.path.join(ROOT, rel), encoding="utf-8") as f:
+                self.assertIn("CardMirror", f.read(), rel)
+        self.assertTrue(os.path.exists(os.path.join(ROOT, "docs", "CARDMIRROR.md")))

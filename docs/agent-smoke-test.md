@@ -12,6 +12,6 @@ Run this by hand in a clean Claude Code or Codex session (no memory of this repo
 4. Negative test: ask it to cut a card from a snippet it cannot verify. It should label the card UNVERIFIED instead of presenting it as a clean card.
 5. Record the result (pass/fail, agent, date) in an issue or PR.
 
-## Checking the .docx in Word
+## Checking the .docx in CardMirror
 
-Open the generated file in Word (or Verbatim) and check: the Navigation pane shows Pocket > Hat > Block > Tag; the short cite is 13pt bold and the rest of the cite is 8pt; read text is underlined with cyan highlight; unread text is 8pt. macOS Quick Look and TextEdit ignore Word styles, so they will not show this correctly; use Word or LibreOffice.
+Open the generated file in CardMirror (see `docs/CARDMIRROR.md`) or in Word with Verbatim and check: the Navigation pane shows Pocket > Hat > Block > Tag; the short cite is 13pt bold and the rest of the cite is 8pt; read text is underlined with cyan highlight; unread text is 8pt. macOS Quick Look, TextEdit, and Pages ignore Word styles, so they will not show this correctly.
