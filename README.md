@@ -18,11 +18,9 @@ There is **no AI API and no key** in this repo. Your own agent does the searchin
 | `templates/` | Blank starter `.docx` files (case, blocks, frontlines) with the Verbatim styles |
 | `examples/` | A small fictional example: source article, card spec, generated `.docx` |
 
-## You need CardMirror (or Verbatim) to view the files
+## Disclaimer about formatting
 
-The `.docx` files carry their formatting in Word styles (Pocket/Hat/Block/Tag, cite, highlight, unread text). **Open them in [CardMirror](https://cardmirror.app/)**, the free Verbatim-compatible editor, or in Microsoft Word with Verbatim. TextEdit, Quick Look, and Pages won't show the formatting.
-
-Full install steps for macOS, Windows, Linux, and the web app are in [docs/CARDMIRROR.md](docs/CARDMIRROR.md).
+**Disclaimer:** the formatting and highlighting live in Word styles, so they only appear when the file is opened in an editor that supports them, such as CardMirror, Verbatim (in Microsoft Word), or another editor with Verbatim-style support. Plain viewers like TextEdit, Quick Look, or Pages may show the text without the formatting.
 
 ## Quick start
 
@@ -57,7 +55,7 @@ python tools/inspect_docx.py out.docx --cards
 python tools/speech_timer.py out.docx --wpm 250
 ```
 
-Open `out.docx` in **CardMirror** (see [docs/CARDMIRROR.md](docs/CARDMIRROR.md)) to see the Pocket/Hat/Block/Tag hierarchy, cite lines, cyan highlights, and 8pt unread text.
+Open `out.docx` in an editor that supports Verbatim-style formatting (see the disclaimer above) to see the Pocket/Hat/Block/Tag hierarchy, cite lines, cyan highlights, and 8pt unread text.
 
 ## The workflow in one picture
 
@@ -71,7 +69,7 @@ research  ->  save full text  ->  cut card spec  ->  build .docx
 
 ## Checking it works
 
-`docs/agent-smoke-test.md` has a hand test for a fresh agent session and a checklist for opening the .docx in CardMirror.
+`docs/agent-smoke-test.md` has a hand test for a fresh agent session and a checklist for checking the .docx in a supporting editor.
 
 ## Principles
 

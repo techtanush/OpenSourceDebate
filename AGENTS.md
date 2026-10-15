@@ -42,7 +42,7 @@ See `tools/README.md` for the spec syntax and `examples/` for a complete fiction
 
 ## Viewing the output
 
-Generated `.docx` files must be opened in **CardMirror** or Verbatim (Word) to show their formatting. Tell the user this whenever you deliver a file, point them to `docs/CARDMIRROR.md` for install steps, and never judge formatting from a TextEdit, Quick Look, or Pages preview. To check formatting yourself, use `python tools/inspect_docx.py file.docx` (it reads the real styles).
+The formatting and highlighting in generated `.docx` files only appear when the file is opened in an editor that supports Verbatim-style formatting, such as CardMirror, Verbatim (in Word), or a similar tool. Tell the user this when you deliver a file, and never judge formatting from a TextEdit, Quick Look, or Pages preview. To check formatting yourself, use `python tools/inspect_docx.py file.docx` (it reads the real styles).
 
 ## Working rules
 

@@ -25,7 +25,7 @@ python tools/verify_quotes.py examples/example-cards.md --strict
 python tools/lint_cites.py examples/example-cards.md
 ```
 
-All must pass. If you change the docx output, add or update a test in `tests/` and open an example in CardMirror (`docs/CARDMIRROR.md`) to confirm it still renders correctly.
+All must pass. If you change the docx output, add or update a test in `tests/` and open an example in an editor that supports Verbatim-style formatting to confirm it still renders correctly.
 
 ## Style
 

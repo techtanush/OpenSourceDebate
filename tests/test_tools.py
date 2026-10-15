@@ -167,8 +167,9 @@ class RepoStructureTests(unittest.TestCase):
 
 
 class DocsTests(unittest.TestCase):
-    def test_cardmirror_docs_linked(self):
+    def test_formatting_disclaimer_present(self):
         for rel in ("README.md", "AGENTS.md"):
             with open(os.path.join(ROOT, rel), encoding="utf-8") as f:
-                self.assertIn("CardMirror", f.read(), rel)
-        self.assertTrue(os.path.exists(os.path.join(ROOT, "docs", "CARDMIRROR.md")))
+                text = f.read()
+            self.assertIn("CardMirror", text, rel)
+            self.assertIn("support", text, rel)

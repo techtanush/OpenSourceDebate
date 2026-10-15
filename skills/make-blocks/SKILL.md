@@ -22,7 +22,7 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 
 ## Delivering files
 
-Tell the user the .docx must be opened in CardMirror or Verbatim (Word) to show its formatting; install steps are in `docs/CARDMIRROR.md`.
+Tell the user the formatting and highlighting only appear when the .docx is opened in an editor that supports Verbatim-style formatting (such as CardMirror or Verbatim in Word).
 
 ## Finish with
 
