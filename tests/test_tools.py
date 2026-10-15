@@ -339,3 +339,73 @@ class LintCaseSolvencyTests(unittest.TestCase):
         import lint_case
         results, _ = lint_case.lint(self._chain([]), aff=False)
         self.assertFalse(any("Solvency:" in r[2] for r in results))
+
+
+class FlowChecksTests(unittest.TestCase):
+    def _ev(self, chain, cards, analytics=()):
+        ev = [("heading", 2, "Contention one: X"), ("analytic", 0, chain)]
+        for name, tag, body in cards:
+            ev.append(("card", 0, tag, 10, name, body))
+        for a in analytics:
+            ev.append(("analytic", 0, a))
+        return ev
+
+    def test_out_of_order_chain_errors(self):
+        import lint_case
+        ev = self._ev("Chain: IMPACT (A) -> UQ (B) -> LINK (C) -> SOLVENCY (D)",
+                      [("A 25", "t1", ""), ("B 25", "t2", ""), ("C 25", "t3", ""), ("D 25", "t4", "")],
+                      ["Solvency: it works."])
+        results, _ = lint_case.lint(ev)
+        self.assertTrue(any(r[0] == "ERROR" and "out of logical order" in r[2] for r in results))
+
+    def test_chain_map_name_mismatch_warns(self):
+        import lint_case
+        ev = self._ev("Chain: UQ (Smith 25) -> LINK (Jones 24) -> IMPACT (Lee 23) -> SOLVENCY (Kim 22)",
+                      [("Smith 25", "t1", ""), ("Zed 20", "t2", ""), ("Lee 23", "t3", ""), ("Kim 22", "t4", "")],
+                      ["Solvency: it works."])
+        results, _ = lint_case.lint(ev)
+        self.assertTrue(any(r[0] == "WARN" and "chain map says LINK" in r[2] for r in results))
+
+    def test_matching_chain_map_is_clean(self):
+        import lint_case
+        ev = self._ev("Chain: UQ (Smith 25) -> LINK (Jones 24) -> IMPACT (Lee 23) -> SOLVENCY (Kim 22)",
+                      [("Smith 25", "t1", ""), ("Jones 24", "t2", ""), ("Lee 23", "t3", ""), ("Kim 22", "t4", "")],
+                      ["Solvency: it works."])
+        results, _ = lint_case.lint(ev)
+        self.assertEqual(results, [])
+
+    def test_tag_label_mismatch_warns(self):
+        import lint_case
+        ev = self._ev("Chain: UQ (A) -> LINK (B) -> IMPACT (C) -> SOLVENCY (D)",
+                      [("A", "LINK: wrong label", ""), ("B", "LINK: right", ""), ("C", "IMPACT: x", ""), ("D", "SOLVENCY: y", "")],
+                      ["Solvency: it works."])
+        results, _ = lint_case.lint(ev)
+        self.assertTrue(any("is labeled LINK but the chain map has UQ" in r[2] for r in results))
+
+    def test_unsupported_number_in_analytic_warns(self):
+        import lint_case
+        ev = self._ev("Chain: UQ (A) -> LINK (B) -> IMPACT (C) -> SOLVENCY (D)",
+                      [("A", "UQ: 412 people injured", ""), ("B", "t", ""), ("C", "t", ""), ("D", "t", "")],
+                      ["Solvency: injuries fall 73 percent."])
+        results, _ = lint_case.lint(ev)
+        self.assertTrue(any("73" in r[2] and "no card" in r[2] for r in results))
+
+    def test_supported_number_in_analytic_ok(self):
+        import lint_case
+        ev = self._ev("Chain: UQ (A) -> LINK (B) -> IMPACT (C) -> SOLVENCY (D)",
+                      [("A", "UQ: 412 people injured", ""), ("B", "t", ""), ("C", "t", ""), ("D", "t", "")],
+                      ["Solvency: all 412 of those injuries are in the core."])
+        results, _ = lint_case.lint(ev)
+        self.assertFalse(any("no card" in r[2] for r in results))
+
+    def test_tag_story_runs_on_example(self):
+        import io
+        import contextlib
+        import tag_story
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            tag_story.main([os.path.join(ROOT, "examples", "example-case.md")])
+        out = buf.getvalue()
+        self.assertIn("Chain map:", out)
+        self.assertIn("SOLVENCY", out)
+        self.assertIn("numbers:", out)

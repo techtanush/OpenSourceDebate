@@ -45,7 +45,8 @@ Rules:
 4. **Number the answers** across tags and analytics (1, 2, 3...), so the speaker can say "number three."
 5. **Close with an analytic** that ties the block back to the resolution or turns the argument.
 6. **Add a source note** (Analytic) only where the source has a weakness the debater must be ready to answer.
-7. Check with `python tools/lint_blocks.py file` (structure) and `python tools/lint_cards.py file` (cards cut too thin).
+7. Check the **flow**: read the numbered answers in order (`python tools/tag_story.py file`); they should run from the cleanest claim to the specifics, not contradict each other, and close with a link back or a turn (`core/logic-flow.md`).
+8. Check with `python tools/lint_blocks.py file` (structure) and `python tools/lint_cards.py file` (cards cut too thin).
 
 A starter file is in `templates/block-skeleton.md`; a worked fictional example is `examples/example-cards.md`.
 

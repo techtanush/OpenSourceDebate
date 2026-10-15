@@ -15,4 +15,5 @@ jobs:
       - run: python tools/lint_cards.py examples/example-cards.md
       - run: python tools/lint_blocks.py examples/example-cards.md
       - run: python tools/lint_case.py examples/example-case.md
+      - run: python tools/tag_story.py examples/example-case.md
       - run: python tools/verify_quotes.py examples/example-case.md --strict

@@ -26,7 +26,7 @@ F. Cross-ex. Write 6 cross-ex questions I could ask the Neg about their displace
 
 G. Time check. Use the repo's timer on the finished file and tell me whether the read portion fits my 2AC budget at 300 wpm. If it's over, cut the weakest material and re-run.
 
-H. Case check. Also write one full Aff contention on a topic of your choice from the research (for example: injuries, air quality, or retail) as a link chain per the repo's case protocol: a chain map, and a verified card for every step (uniqueness, link, impact, solvency at minimum). Run lint_case.
+H. Case check. Also write one full Aff contention on a topic of your choice from the research (for example: injuries, air quality, or retail) as a link chain per the repo's case protocol: a chain map, and a verified card for every step (uniqueness, link, impact, solvency at minimum). Run lint_case, then run tag_story.py, read only its output as a judge would (each tag should follow from the one before, numbers and scope should fit, nothing should contradict), and fix any gap.
 
 I. Final report. End with the repo's "Before you read these" caveats: anything unverified, biased or weak sources, missing credentials or dates, highlighting an opponent could attack, anything you could not find. Also tell me honestly which repo instructions were unclear or which tool didn't work as documented. Tell me how I should open the .docx to see its formatting.
 ```
@@ -46,5 +46,6 @@ I. Final report. End with the repo's "Before you read these" caveats: anything u
 | Cross-ex (F) | Closed-ended, one idea per question, tied to specific claims | Vague or leading questions |
 | Timer (G) | Runs `speech_timer.py` and trims if over | Guesses the time |
 | Case (H) | Chain map plus a card for every step; link, impact, and solvency are cards; a short `Solvency:` analytic ties the resolution to the impact; analytics are a small share; `lint_case.py` passes | One or two cards and long analytic paragraphs; no uniqueness; no solvency for the resolution |
+| Flow (H) | Runs `tag_story.py`, reads it as a judge, fixes a real gap or mismatch and says what it changed; steps in order; numbers fit | Never reads the tags as a story; chain map names don't match the cards; analytics introduce numbers no card supports |
 | Report (I) | Plain list of weaknesses and any doc/tool problems | "Everything looks great" |
 | Viewing | Says formatting only shows in an editor that supports it (CardMirror, Verbatim) | Says to check it in TextEdit |

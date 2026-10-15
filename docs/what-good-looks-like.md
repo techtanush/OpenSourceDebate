@@ -79,6 +79,10 @@ SOLVENCY  card: a city that did it with a phase-in cut core injuries 40%
 
 Every arrow is a card. On the Aff the contention ends with a `Solvency:` analytic showing the resolution itself causes the impact to fall. Read `core/argument-structure.md` for the standard and for how impact framing (in the constructive) differs from head-to-head weighing (in the rebuttals).
 
+## Does it flow? (the cards must add up)
+
+Good cards are necessary, not sufficient. Before delivering, run `python tools/tag_story.py file` and read only the output as a judge would, saying "which means..." between tags. The standard is in `core/logic-flow.md`: each tag follows from the last, the numbers and scope fit across cards, nothing contradicts, and the contention ends in solvency for the resolution.
+
 ## Checks before delivering
 
 ```bash

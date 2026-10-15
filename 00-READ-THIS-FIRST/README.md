@@ -18,7 +18,7 @@ A toolkit that teaches an AI coding agent (**Claude Code**, **Codex**, or simila
 | **A debater** setting it up | This page, then [reading-order.md](reading-order.md) and the Quick start below |
 | **Someone improving the repo** | [reading-order.md](reading-order.md), `CONTRIBUTING.md`, `docs/agent-smoke-test.md`, `docs/fresh-session-test-prompt.md` |
 
-## The six rules everything follows
+## The seven rules everything follows
 
 1. **Never fabricate.** Quotes are verbatim from a saved source. Anything unverified is labeled UNVERIFIED (`core/integrity.md`).
 2. **Cut real cards.** Tag, full cite, body with context around the read text, only the key words read (`core/cutting-rules.md`).
@@ -26,6 +26,8 @@ A toolkit that teaches an AI coding agent (**Claude Code**, **Codex**, or simila
 4. **Blocks hold the actual cards.** A block states the opposing argument, numbers the answers, puts a cut card under each, and closes with a link or turn. Analytics never replace cards (`speeches/blocks/PROTOCOL.md`).
 5. **Check the work.** Run the tools before delivering (below).
 6. **Be honest about weaknesses.** End every deliverable with a "Before you read these" list.
+
+7. **The whole must flow.** Read the tags as a story (`tools/tag_story.py`, `core/logic-flow.md`): each step follows from the last, the numbers fit, nothing contradicts.
 
 ## Quick start (about ten minutes)
 

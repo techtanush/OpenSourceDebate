@@ -58,7 +58,7 @@ python tools/lint_cards.py examples/example-case.md --profile case       # const
 python tools/verify_quotes.py examples/example-case.md --strict
 ```
 
-Read `core/argument-structure.md` alongside it. Built Word versions are checked in as `examples/example-case.docx` and `examples/example-case-DRAFT.docx`.
+Read `core/argument-structure.md` alongside it. Then run `python tools/tag_story.py examples/example-case.md` and read only the tags and numbers as a judge would, with `core/logic-flow.md` open. Built Word versions are checked in as `examples/example-case.docx` and `examples/example-case-DRAFT.docx`.
 
 ## 4c. A real 1AC mapped to the chain standard (private reference)
 

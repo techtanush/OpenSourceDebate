@@ -41,6 +41,10 @@ Voting issues   (if your format's last rebuttal) 2-3 crisp reasons
 
 Open with a **cross-case contradiction** if one exists (two of their cards that can't both be true). It can take out several arguments at once.
 
+## Flow check
+
+Before delivering, read your answers in order as the judge would hear them (`core/logic-flow.md`). Each answer should make the decision easier, answers within a block must not contradict one another, and the overview, line-by-line, and weighing should tell one story.
+
 ## Step 4: Evidence
 
 - Use evidence you already have; research new cards only where a gap is serious (`core/research-protocol.md`).

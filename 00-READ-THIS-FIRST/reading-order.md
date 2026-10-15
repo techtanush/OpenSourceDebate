@@ -20,6 +20,7 @@ Read in this order. The first four steps apply to every task; step 5 depends on 
 | 7 | `docs/what-good-looks-like.md` | An annotated real block, and exactly what went wrong in a test run |
 | 8 | `core/source-evaluation.md` and `core/research-protocol.md` | How to find, rate, and save sources |
 | 9 | `core/argument-structure.md` | For cases, DAs, and any argument with causal steps: the link-chain standard (uniqueness, link, internal link, impact, solvency), the chain map, and impact framing vs. weighing |
+| 10 | `core/logic-flow.md` | How the cards combine into one story: the tag-story test, numbers that fit, no contradictions, case-level read-through |
 
 ## Then the protocol for your task
 

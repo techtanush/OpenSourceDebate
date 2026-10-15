@@ -59,6 +59,10 @@ Analytic        Solvency: how the resolution itself causes this impact to fall, 
 
 `python tools/lint_case.py case.md` checks these.
 
+## Logic flow: the cards must add up
+
+Strong cards are not enough; the chain must read as one story. Read `core/logic-flow.md` and, before delivering, run `python tools/tag_story.py case.md`. Read only its output, top to bottom, saying "which means..." between tags. Fix any missing step, out-of-order step, mismatched numbers or scope, and contradictions between contentions. `lint_case.py` checks step order, that the chain map matches the cards, and that analytics don't invent numbers.
+
 ## Impact framing vs. weighing
 
 In a constructive, **frame** each impact (size, who is affected, timeframe, reversibility) in a few sentences. Do **not** spend constructive time comparing against arguments the opponent has not made yet; that head-to-head weighing (probability, magnitude, timeframe, reversibility) belongs in the rebuttals and summary speeches (`speeches/rebuttal/PROTOCOL.md`, `speeches/summary-final/PROTOCOL.md`).
@@ -85,6 +89,7 @@ In a constructive, **frame** each impact (size, who is affected, timeframe, reve
 - [ ] At least four cards per contention; the link, the impact, and the solvency are cards, not analytics.
 - [ ] Each Aff contention has a SOLVENCY card and a `Solvency:` analytic showing the resolution itself causes the impact to fall.
 - [ ] Analytics are a small share of the speech: cards carry the argument.
+- [ ] Logic flow: `tag_story.py` read as a judge: each tag follows from the one before, numbers and scope fit, no contradictions (`core/logic-flow.md`).
 - [ ] Each tag is supported by the highlighted words (`verify_quotes.py` and a human read).
 - [ ] Cites are complete (`lint_cites.py`) and cards are properly cut (`lint_cards.py --profile case`).
 - [ ] No card is read twice; later extensions should be short analytics (see `speeches/frontlines/PROTOCOL.md`).

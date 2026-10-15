@@ -111,7 +111,15 @@ python tools/lint_case.py case.md          # Aff case (solvency required)
 python tools/lint_case.py case.docx --neg  # Neg case / DAs
 ```
 
-Checks every contention (a Hat or Block titled "Contention...", "C1...", "Advantage...", "DA..."): at least four cards, a chain map (`Chain: UQ (Card) -> LINK (Card) -> IMPACT (Card) ...`) before the first card, UQ / LINK / IMPACT (and SOLVENCY for Aff) present in the map, and at least as many cards as steps. Warns on long analytics (over 90 words). Exit 1 on any error. Standard: `core/argument-structure.md`.
+Checks every contention (a Hat or Block titled "Contention...", "C1...", "Advantage...", "DA..."): at least four cards, a chain map (`Chain: UQ (Card) -> LINK (Card) -> IMPACT (Card) ...`) before the first card, UQ / LINK / IMPACT (and SOLVENCY for Aff) present in the map, and at least as many cards as steps. Also requires an Aff `Solvency:` analytic, fails when analytics outweigh cards, and checks flow: steps in logical order, chain-map card names match the cards in order, and numbers in analytics appear in a card (warning). Warns on long analytics (over 60 words). Exit 1 on any error. Standard: `core/argument-structure.md`.
+
+## tag_story.py
+
+```bash
+python tools/tag_story.py case.md      # or a .docx
+```
+
+Prints the chain map and every tag in order with its cite, the chain step it fills, and the numbers it carries, so you can read the logic flow as a judge would. It makes the flow visible; it does not judge it. See `core/logic-flow.md`.
 
 ## lint_cards.py
 

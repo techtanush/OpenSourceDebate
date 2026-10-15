@@ -20,6 +20,13 @@ A "contention" is a Hat (Heading 2) or Block (Heading 3) whose title starts with
   WARN    analytics are a large share of the contention (over WARN_ANALYTIC_SHARE)
   WARN    a long analytic (over MAX_ANALYTIC_WORDS words): evidence should carry that work
 
+Logic-flow checks (see core/logic-flow.md):
+  ERROR   chain steps out of logical order (UQ, TREND, LINK, IL, IMPACT must not go backwards)
+  WARN    the card named in the chain map for a step is not the card at that position
+  WARN    a card tag starts with a step label (e.g. "LINK:") that disagrees with the chain map
+  WARN    a number (2+ digits, %, or $) appears in an analytic but in no card tag or body of
+          that contention: analytics must not introduce numbers the cards don't support
+
 Step names: UQ, TREND, LINK, IL, IMPACT, SOLVENCY. See core/argument-structure.md.
 Exit code 1 on any ERROR.
 """
@@ -35,6 +42,21 @@ MAX_ANALYTIC_WORDS = 60
 WARN_ANALYTIC_SHARE = 0.30
 MAX_ANALYTIC_SHARE = 0.50
 STEP_RE = re.compile(r"\b(UQ|TREND|LINK|IL|IMPACT|SOLVENCY)\b")
+STEP_NAME_RE = re.compile(r"\b(UQ|TREND|LINK|IL|IMPACT|SOLVENCY)\s*\(([^)]*)\)")
+TAG_LABEL_RE = re.compile(r"^\s*(UQ|TREND|LINK|IL|IMPACT|SOLVENCY)\s*:", re.I)
+NUMBER_RE = re.compile(r"\$?\d[\d,]*(?:\.\d+)?%?")
+ORDER = ["UQ", "TREND", "LINK", "IL", "IMPACT"]
+
+
+def _numbers(text):
+    out = set()
+    for tok in NUMBER_RE.findall(text):
+        clean = tok.replace(",", "").lstrip("$").rstrip("%").rstrip(".")
+        if not clean:
+            continue
+        if len(clean.replace(".", "")) >= 2 or "%" in tok or tok.startswith("$"):
+            out.add(clean)
+    return out
 CONTENTION_RE = re.compile(r"^\s*(contention|c\d+\b|advantage|adv\b|da\b|disad)", re.I)
 
 
@@ -49,7 +71,8 @@ def events_from_spec(path):
         elif t == "card":
             from verify_quotes import body_runs_any
             read = sum(len(txt.split()) for txt, m in body_runs_any(item) if m == "read")
-            out.append(("card", 0, item["tag"], read))
+            body_text = " ".join(txt for txt, _ in body_runs_any(item))
+            out.append(("card", 0, item["tag"], read, item.get("cite", {}).get("name", ""), body_text))
         elif t == "analytic":
             out.append(("analytic", 0, item["text"]))
     return out
@@ -70,11 +93,14 @@ def events_from_docx(path):
             while j < len(paras) and not paras[j]["runs"]:
                 j += 1
             if j < len(paras) and paras[j]["style"] == "Normal":
-                read, k = 0, j + 1
+                read, k, body_text = 0, j + 1, []
                 while k < len(paras) and paras[k]["style"] == "Normal":
                     read += sum(len(r["text"].split()) for r in paras[k]["runs"] if r["highlight"])
+                    body_text.append(I.para_text(paras[k]))
                     k += 1
-                out.append(("card", 0, text, read))
+                cite_runs = paras[j]["runs"]
+                name = cite_runs[0]["text"].strip().rstrip(",") if cite_runs else ""
+                out.append(("card", 0, text, read, name, " ".join(body_text)))
     return out
 
 
@@ -91,7 +117,8 @@ def sections(events):
                 cur = {"title": text, "level": level, "items": []}
                 secs.append(cur)
         elif cur is not None:
-            cur["items"].append((kind, text, ev[3] if len(ev) > 3 else 0))
+            cur["items"].append((kind, text, ev[3] if len(ev) > 3 else 0,
+                                 ev[4] if len(ev) > 4 else "", ev[5] if len(ev) > 5 else ""))
     return secs
 
 
@@ -100,14 +127,14 @@ def lint(events, aff=True):
     secs = sections(events)
     for s in secs:
         title, items = s["title"], s["items"]
-        cards = [t for k, t, _ in items if k == "card"]
+        cards = [it[1] for it in items if it[0] == "card"]
         if len(cards) < MIN_CARDS:
             results.append(("ERROR", title,
                             "only %d card(s); a contention needs a chain of at least %d" %
                             (len(cards), MIN_CARDS)))
-        first_card = next((n for n, (k, _, _) in enumerate(items) if k == "card"), len(items))
-        chain = next((t for k, t, _ in items[:first_card]
-                      if k == "analytic" and re.match(r"^\s*chain\s*:", t, re.I)), None)
+        first_card = next((n for n, it in enumerate(items) if it[0] == "card"), len(items))
+        chain = next((it[1] for it in items[:first_card]
+                      if it[0] == "analytic" and re.match(r"^\s*chain\s*:", it[1], re.I)), None)
         if chain is None:
             results.append(("ERROR", title,
                             "no chain map before the first card "
@@ -122,8 +149,8 @@ def lint(events, aff=True):
                 results.append(("ERROR", title,
                                 "chain map names %d steps but there are only %d cards: "
                                 "a step has no card" % (len(steps), len(cards))))
-        analytics = [t for k, t, _ in items
-                     if k == "analytic" and not re.match(r"^\s*chain\s*:", t, re.I)]
+        analytics = [it[1] for it in items
+                     if it[0] == "analytic" and not re.match(r"^\s*chain\s*:", it[1], re.I)]
         if aff and not any(re.match(r"^\s*solvency\s*:", t, re.I) for t in analytics):
             results.append(("ERROR", title,
                             "no 'Solvency:' analytic: state in a sentence or two how the "
@@ -135,7 +162,7 @@ def lint(events, aff=True):
                                 "long analytic (%d words): evidence should carry this: %r" %
                                 (n, t[:60])))
         a_words = sum(len(t.split()) for t in analytics)
-        read_words = sum(r for k, _, r in items if k == "card")
+        read_words = sum(it[2] for it in items if it[0] == "card")
         total = a_words + read_words
         if total:
             share = a_words / total
@@ -149,6 +176,41 @@ def lint(events, aff=True):
                                 "analytics are %d%% of what is spoken (%d vs %d read from "
                                 "cards): lean harder on cards" %
                                 (round(share * 100), a_words, read_words)))
+        # ---- logic-flow checks
+        card_items = [it for it in items if it[0] == "card"]
+        if chain is not None:
+            steps_in_order = STEP_RE.findall(chain)
+            ranks = [ORDER.index(x) for x in steps_in_order if x in ORDER]
+            if ranks != sorted(ranks):
+                results.append(("ERROR", title,
+                                "chain steps are out of logical order (%s): the chain must run "
+                                "UQ, TREND, LINK, IL, IMPACT" % " -> ".join(steps_in_order)))
+            named = STEP_NAME_RE.findall(chain)
+            for n, (step, nm) in enumerate(named):
+                nm = nm.strip()
+                if nm and n < len(card_items):
+                    actual = card_items[n][3]
+                    if actual and nm.lower() not in actual.lower() and actual.lower() not in nm.lower():
+                        results.append(("WARN", title,
+                                        "chain map says %s (%s) but card %d is %r: reorder the cards "
+                                        "or fix the map" % (step, nm, n + 1, actual)))
+            for n, it in enumerate(card_items):
+                m = TAG_LABEL_RE.match(it[1])
+                if m and chain is not None:
+                    seq = STEP_RE.findall(chain)
+                    if n < len(seq) and m.group(1).upper() != seq[n]:
+                        results.append(("WARN", title,
+                                        "card %d tag is labeled %s but the chain map has %s there" %
+                                        (n + 1, m.group(1).upper(), seq[n])))
+        evidence_numbers = set()
+        for it in card_items:
+            evidence_numbers |= _numbers(it[1]) | _numbers(it[4])
+        for t in analytics:
+            missing = sorted(_numbers(t) - evidence_numbers)
+            if missing:
+                results.append(("WARN", title,
+                                "analytic uses number(s) %s that appear in no card of this "
+                                "contention: %r" % (", ".join(missing), t[:60])))
     return results, len(secs)
 
 
