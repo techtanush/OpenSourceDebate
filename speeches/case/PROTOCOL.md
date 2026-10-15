@@ -2,7 +2,11 @@
 
 Used for: the first speech of a side (constructive). Aff builds a case for the resolution; Neg builds a case, disadvantages, or counter-positions against it.
 
-Read first: `core/integrity.md`, `core/card-anatomy.md`, `core/cutting-rules.md`, and the speech time/word budget in `formats/<your-format>.yaml`.
+Read first: `core/integrity.md`, `core/argument-structure.md` (the link-chain standard, which this protocol depends on), `core/card-anatomy.md`, `core/cutting-rules.md`, and the speech time budget in `formats/<your-format>.yaml`.
+
+## The main failure to avoid
+
+A case built from **one or two cards per contention** plus long explanatory paragraphs. It reads like an essay with a few citations. A real contention is a **chain of cards**: the problem now, the mechanism that connects the plan to the change, each consequence, the final impact with its size, and proof the plan works. Analytics connect the cards; they never stand in for them. Read `core/argument-structure.md` before you start.
 
 ## Inputs to collect
 
@@ -13,52 +17,73 @@ Read first: `core/integrity.md`, `core/card-anatomy.md`, `core/cutting-rules.md`
 
 ## Structure
 
-A typical constructive, adapt to format:
+A typical constructive, adapted to the format:
 
-1. **Introduction**: 1-3 sentences that frame the stakes.
-2. **Framework / burden** (if your format uses it): what the judge should weigh.
-3. **Contentions** (2-3): each follows the chain below.
-4. **Conclusion**: one sentence that ties the contentions to the ballot.
+1. **Introduction:** 1-3 sentences that frame the stakes.
+2. **Plan / resolutional commitments** (Aff, if your format uses a plan): the exact text, with the evidence that its provisions are workable.
+3. **Framework / burden** (if your format uses it): what the judge should weigh.
+4. **Contentions** (usually 2-3): each is a full chain (below).
+5. **Conclusion:** one sentence that ties the contentions to the ballot.
 
-### Contention chain
+### The contention chain
+
+Each contention follows the parts in `core/argument-structure.md`:
 
 ```
-Claim            one-sentence tag of the contention
-Uniqueness       what is true now (evidence)
-Link             why the plan/resolution (or the Neg position) changes it
-Internal link(s) middle steps, only as many as needed
-Impact           the final benefit/harm and its size, plus who is affected
-Solvency         (Aff) why the resolution actually fixes it
+Heading         Contention N: <claim in one sentence>
+Chain map       Chain: UQ (card) -> LINK (card) -> IL (card) -> IMPACT (card) -> SOLVENCY (card)
+Tag + card      UQ:       the problem now, with a number
+Tag + card      TREND:    it is getting worse (optional but strong)
+Tag + card      LINK:     the mechanism: why the plan changes it
+Tag + card      IL:       each consequence, one card per step
+Tag + card      IMPACT:   final harm or benefit, with size and timeframe
+Tag + card      SOLVENCY: the plan works when implemented
+Analytic        1-2 sentences of impact framing: size, who is affected, timeframe, reversibility
 ```
 
-Every step needs a card or a clear analytic. A chain that is longer than 4 steps is fragile: shorten it or add evidence.
+### Minimums
+
+- **At least 4 cards per contention**, and one for every step named in the chain map. About 6-8 is typical for a strong contention in the real files in `reference/`.
+- **Every step in the chain map has a card.** A step with no card is an assertion; cut the step or find the card.
+- **The link is a card.** Do not write it as analytic prose.
+- **The impact has a number and a timeframe.**
+- **Analytics stay short** (1-3 sentences), and they connect or frame cards. Do not use a long analytic paragraph where evidence is missing.
+- **Hedge honestly, not endlessly.** If a card is an analogy (a different city or a different measure), state the limit in a sentence and add a second, independent card so the chain does not rest on one analogy.
+
+`python tools/lint_case.py case.md` checks these.
+
+## Impact framing vs. weighing
+
+In a constructive, **frame** each impact (size, who is affected, timeframe, reversibility) in a few sentences. Do **not** spend constructive time comparing against arguments the opponent has not made yet; that head-to-head weighing (probability, magnitude, timeframe, reversibility) belongs in the rebuttals and summary speeches (`speeches/rebuttal/PROTOCOL.md`, `speeches/summary-final/PROTOCOL.md`).
 
 ## Writing the case
 
-1. **List the strongest arguments** for the side. Use the research protocol to find evidence for each.
-2. **Order by strength and time.** Lead with the contention you most want the round decided on.
-3. **Cut cards** to be read: highlight only what supports the tag, and keep the read text within the word budget (`tools/speech_timer.py`).
-4. **Write analytics** (dark blue) between cards: 1-2 sentences connecting card to claim.
-5. **Pre-empt the top response** inside the speech if time allows (a short "even if").
-6. **Check time.** Run `speech_timer.py case.docx --wpm <rate> --limit <seconds>`.
+1. **Outline the chains first.** For each contention write the chain map, then list the card you need for each step. Mark the gaps.
+2. **Research the gaps** (`core/research-protocol.md`). Look hardest for the link, the impact scale, and solvency; those are the usual holes.
+3. **Order contentions by strength** and by the time you have. Lead with the contention you most want the round decided on.
+4. **Cut each card** with context and sparse read text (`core/cutting-rules.md`); a constructive card is usually longer than a block card.
+5. **Write the connecting analytics** after the cards exist, so each one says what the cards prove, not what you hope they prove.
+6. **Check time.** `python tools/speech_timer.py case.docx --wpm <rate> --limit <seconds>`. If over, cut the weakest contention's extra cards, never a required step.
 
 ## Neg cases and off-case positions
 
-- **Disadvantage (DA):** shell with uniqueness, link, impact. State the link in the Aff's own terms ("The resolution requires X; X causes Y").
-- **Counter-plan / alternative:** must be competitive (can't be done alongside the resolution) and solve the Aff's harms; include evidence that it avoids the Aff's costs.
+- **Disadvantage (DA):** use the same chain standard: UQ (things are stable now), link (the Aff causes the trigger), internal links, impact. A DA with one card is a claim.
+- **Counter-plan / alternative:** must be competitive and solve the Aff's harms; include evidence that it avoids the Aff's costs.
 - **Case takeouts:** short, evidenced answers to each Aff contention to read alongside off-case positions.
 - Note which Neg positions the Aff can turn, and prepare the response.
 
 ## Quality checks
 
+- [ ] Each contention opens with a chain map and has a card for every step in it (`lint_case.py`).
+- [ ] At least four cards per contention; the link and the impact are cards, not analytics.
 - [ ] Each tag is supported by the highlighted words (`verify_quotes.py` and a human read).
-- [ ] Cites are complete (`lint_cites.py`).
-- [ ] No card is read twice; extensions later should be short analytics (see `speeches/frontlines/PROTOCOL.md`).
+- [ ] Cites are complete (`lint_cites.py`) and cards are properly cut (`lint_cards.py --profile case`).
+- [ ] No card is read twice; later extensions should be short analytics (see `speeches/frontlines/PROTOCOL.md`).
 - [ ] The speech fits the time limit at your rate.
-- [ ] Every impact is weighed against the likely opposing impact.
+- [ ] Each impact is framed (size, timeframe); comparison against the opponent is left to the rebuttals.
 - [ ] A "before you read these" list is delivered with the case (`integrity.md`).
 
 ## Output
 
-- `case.md` (spec) and `case.docx` built with `tools/build_docx.py`.
-- A one-page summary: contentions, key cards, expected responses.
+- `case.md` (spec) and `case.docx` built with `tools/build_docx.py` (add `--draft` for a cutting copy).
+- A one-page summary: contentions, the chain map for each, key cards, expected responses.

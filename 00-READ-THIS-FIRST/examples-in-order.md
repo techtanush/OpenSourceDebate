@@ -42,6 +42,24 @@ python tools/inspect_docx.py out.docx --cards                      # what the .d
 
 All should pass. Then try breaking it (change one word inside a card body; delete a card under a tag) and watch the right tool fail.
 
+## 4b. The fictional case (a contention as a link chain)
+
+`examples/example-case.md` is one fictional contention built the way the repo requires. Notice:
+
+- the **chain map** under the heading (`Chain: UQ (...) -> TREND (...) -> LINK (...) -> IL (...) -> IMPACT (...) -> SOLVENCY (...)`);
+- **a card for every step**, each with a tag that states its job (`UQ:`, `LINK:`, ...);
+- **short analytics** only (connecting sentences and one impact-framing line);
+- the sources are in `examples/case-sources/` and each card verifies against its source.
+
+```bash
+python tools/build_docx.py examples/example-case.md -o case-out.docx
+python tools/lint_case.py examples/example-case.md                       # chain map + a card per step
+python tools/lint_cards.py examples/example-case.md --profile case       # constructive-length cards
+python tools/verify_quotes.py examples/example-case.md --strict
+```
+
+Read `core/argument-structure.md` alongside it. Built Word versions are checked in as `examples/example-case.docx` and `examples/example-case-DRAFT.docx`.
+
 ## 5. A real blocks file (private reference)
 
 `reference/example-blocks/example-blocks-excerpt.docx`: about 6,000 words from a real team blocks file (15 blocks). Study its shape, then read the annotated walkthrough in `docs/what-good-looks-like.md`.
@@ -66,6 +84,7 @@ What to notice: every block states the opposing argument, numbers its answers, p
 ## The mistakes to avoid (from a real test run)
 
 - A block made only of analytics that say "Extend X" (no cards in the file).
+- A contention with one or two cards and long explanatory paragraphs instead of a chain of cards: no uniqueness, no proven link, no impact number, no solvency.
 - No statement of the opposing argument at the top of a block.
 - Cards cut as one highlighted sentence with nothing around it.
 - Claiming something was verified without running the tools.

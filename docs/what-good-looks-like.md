@@ -48,6 +48,36 @@ What to copy:
 6. **The block ends with an analytic** that ties the answer back to the resolution or turns the argument.
 7. **Numbering runs through the whole block**, mixing analytics and tagged cards, so the speaker can say "number four."
 
+## What a good contention looks like (cases and DAs)
+
+A second test run built a 1AC with three contentions. It had about **one or two cards per contention** and 21 analytic paragraphs, several over 100 words. Each contention argued a direction ("fewer injuries," "cleaner air," "commerce can adapt") from a single study, and explained its limits at length. What was missing:
+
+| Missing | Why it matters |
+|---------|---------------|
+| **Uniqueness**: no card showing how big the problem is now | The judge has no baseline; "fewer injuries" from what? |
+| **A link chain**: no card for each causal step | A mechanism written as prose is an assertion the opponent can simply deny |
+| **Impact with a number and a timeframe** | "Fewer injuries" is a direction, not a weighable impact |
+| **Solvency**: no card showing the plan works as implemented | The case argues benefits but not that this plan delivers them |
+| **Cards instead of essays**: long analytics doing the evidence's job | Analytics connect cards; they are not evidence |
+
+For comparison, the real constructives in `reference/` carry roughly six to eight cards per contention: the problem now, how fast it is growing, the key scale number, the mechanism, the consequence, the terminal impact, and solvency. `python tools/lint_case.py` on the agent's case reported 6 errors and 2 warnings; `python tools/lint_case.py examples/example-case.md` reports none.
+
+The target shape (see `examples/example-case.md`, a fictional contention):
+
+```
+Contention 1: Downtown car traffic is injuring and killing people
+Chain: UQ (...) -> TREND (...) -> LINK (...) -> IL (...) -> IMPACT (...) -> SOLVENCY (...)
+UQ        card: the downtown is <2% of the land but a third of walking injuries (412 injured, 9 killed)
+TREND     card: car entries +17%, injuries +22% since 2019, forecast to keep rising
+LINK      card: restrictions cut injuries 36% across eleven cities, none shifted next door
+IL        card: each serious injury costs ~$187,000, ~41% paid by public programs
+IMPACT    card: 7,310 urban pedestrian/cyclist deaths, a four-decade high; >$140B a year
+          framing: who it falls on, timeframe, irreversibility (one or two sentences)
+SOLVENCY  card: a city that did it with a phase-in cut core injuries 40%
+```
+
+Every arrow is a card. Read `core/argument-structure.md` for the standard and for how impact framing (in the constructive) differs from head-to-head weighing (in the rebuttals).
+
 ## Checks before delivering
 
 ```bash
@@ -55,6 +85,7 @@ python tools/verify_quotes.py file.md --strict   # card text is verbatim from th
 python tools/lint_cites.py file.md               # cites complete
 python tools/lint_cards.py file.md               # no card is a lone highlighted sentence
 python tools/lint_blocks.py file.md              # blocks have real cards and the right shape
+python tools/lint_case.py file.md                # contentions are chains: chain map, a card for every step
 ```
 
 ## Reference material

@@ -1,0 +1,11 @@
+Injury Outcomes After Downtown Car Restrictions: A Multi-City Review
+
+By Dr. Priya Venkataraman and colleagues, Example Public Health Review, March 2025.
+
+We reviewed injury records for eleven mid-sized cities that restricted private cars in their downtown cores between 2015 and 2021, comparing each city's core with matched streets that were not restricted. We also examined injuries on the roads bordering each restricted area to test whether crashes simply moved next door.
+
+Across the eleven cities, injuries to people walking or cycling inside the restricted cores fell by an average of 36 percent in the three years after restriction, relative to the comparison streets. Injuries on bordering roads did not rise on average; the estimated change was a decline of 2 percent, which was not statistically distinguishable from zero.
+
+The mechanism appears to be reduced conflict at intersections and curbs. The authors found the largest reductions at intersections that had previously carried heavy turning traffic, and at curbside locations where parking maneuvers were removed.
+
+The study is observational, and the cities were mid-sized. The authors note that results may differ in very large metropolitan areas.

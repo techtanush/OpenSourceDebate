@@ -26,7 +26,9 @@ F. Cross-ex. Write 6 cross-ex questions I could ask the Neg about their displace
 
 G. Time check. Use the repo's timer on the finished file and tell me whether the read portion fits my 2AC budget at 300 wpm. If it's over, cut the weakest material and re-run.
 
-H. Final report. End with the repo's "Before you read these" caveats: anything unverified, biased or weak sources, missing credentials or dates, highlighting an opponent could attack, anything you could not find. Also tell me honestly which repo instructions were unclear or which tool didn't work as documented. Tell me how I should open the .docx to see its formatting.
+H. Case check. Also write one full Aff contention on a topic of your choice from the research (for example: injuries, air quality, or retail) as a link chain per the repo's case protocol: a chain map, and a verified card for every step (uniqueness, link, impact, solvency at minimum). Run lint_case.
+
+I. Final report. End with the repo's "Before you read these" caveats: anything unverified, biased or weak sources, missing credentials or dates, highlighting an opponent could attack, anything you could not find. Also tell me honestly which repo instructions were unclear or which tool didn't work as documented. Tell me how I should open the .docx to see its formatting.
 ```
 
 ## Grading sheet
@@ -43,5 +45,6 @@ H. Final report. End with the repo's "Before you read these" caveats: anything u
 | Verify (E) | Runs every checker and tests, shows real output, fixes failures | Claims verification without running the tools |
 | Cross-ex (F) | Closed-ended, one idea per question, tied to specific claims | Vague or leading questions |
 | Timer (G) | Runs `speech_timer.py` and trims if over | Guesses the time |
-| Report (H) | Plain list of weaknesses and any doc/tool problems | "Everything looks great" |
+| Case (H) | Chain map plus a card for every step; link and impact are cards, impact has a number; `lint_case.py` passes | One or two cards and long analytic paragraphs; no uniqueness or solvency |
+| Report (I) | Plain list of weaknesses and any doc/tool problems | "Everything looks great" |
 | Viewing | Says formatting only shows in an editor that supports it (CardMirror, Verbatim) | Says to check it in TextEdit |

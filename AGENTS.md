@@ -17,7 +17,7 @@ You are helping a debater research, cut cards, and write files. This repo gives 
 |----------------------|-----------|-----------------|
 | Cut one or more cards | `core/cutting-rules.md`, `core/card-anatomy.md`, `core/cite-format.md`, `docs/what-good-looks-like.md` | `build_docx.py`, `verify_quotes.py`, `lint_cites.py`, `lint_cards.py` |
 | Research evidence on a claim | `core/research-protocol.md`, `core/source-evaluation.md` | `verify_quotes.py` |
-| Write a constructive case | `speeches/case/PROTOCOL.md` | `build_docx.py`, `speech_timer.py` |
+| Write a constructive case, DA, or any chained argument | `core/argument-structure.md`, `speeches/case/PROTOCOL.md`, `templates/case-skeleton.md` | `build_docx.py`, `lint_case.py`, `speech_timer.py` |
 | Write a rebuttal against a case | `speeches/rebuttal/PROTOCOL.md` | `speech_timer.py` |
 | Build frontlines (defend our own arguments) | `speeches/frontlines/PROTOCOL.md` | `build_docx.py` |
 | Build blocks / A2 files (answer their arguments) | `speeches/blocks/PROTOCOL.md` | `build_docx.py` |
@@ -38,6 +38,7 @@ python tools/verify_quotes.py spec.md [--strict]    # body text must be verbatim
 python tools/lint_cites.py spec.md                  # missing/malformed cite fields
 python tools/lint_cards.py spec.md                  # cards cut too thin? (also works on .docx; --profile case)
 python tools/lint_blocks.py spec.md                 # blocks complete? argument stated, real cards, closing analytic
+python tools/lint_case.py spec.md                   # contentions are real link chains (chain map, card per step)
 python tools/speech_timer.py file --wpm 250         # reading time (docx counts highlighted text only)
 python -m unittest discover -s tests                # run the tests
 ```
@@ -51,8 +52,9 @@ The formatting and highlighting in generated `.docx` files only appear when the 
 ## Working rules
 
 - **Save sources.** Put the full text of every article in `sources/<shortcite>.txt` and set `source:` on the card. `sources/` is gitignored.
-- **Verify before delivering.** Run `verify_quotes.py`, `lint_cites.py`, `lint_cards.py`, and (for blocks/frontlines) `lint_blocks.py`. Report failures plainly and fix them.
+- **Verify before delivering.** Run `verify_quotes.py`, `lint_cites.py`, `lint_cards.py`, and (for blocks/frontlines) `lint_blocks.py`, and (for cases and DAs) `lint_case.py`. Report failures plainly and fix them.
 - **Cut real cards, and put them in the file.** Each card has context around the read text, and only a sparse part is read. Blocks and frontlines hold the actual cards, never analytics that merely mention a card in another file. Follow the block anatomy in `speeches/blocks/PROTOCOL.md` and see `docs/what-good-looks-like.md`.
+- **Build chains, not claims.** Every contention needs a card for each step (UQ, LINK, IL, IMPACT, SOLVENCY) and a chain map. One card plus explanatory paragraphs is a failed contention. See `core/argument-structure.md`.
 - **Offer a cutting copy.** If the user will finish the highlighting themselves, also build with `--draft` (proposed read text in bold, context at normal size).
 - **Report caveats.** End every evidence task with a short "Before you read these" list: UNVERIFIED quotes, biased or weak sources, missing credentials, attackable highlighting.
 - **Respect the user's files.** Read their existing files only to learn style or to reuse their own cards. Do not publish or copy them elsewhere.

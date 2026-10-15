@@ -246,3 +246,67 @@ class ReadFirstFolderTests(unittest.TestCase):
                                 if ".git" not in _)
                 self.assertTrue(found, "%s mentions missing path %s" %
                                 (os.path.basename(path), ref))
+
+
+class LintCaseTests(unittest.TestCase):
+    CASE_MD = os.path.join(ROOT, "examples", "example-case.md")
+
+    def test_example_case_passes(self):
+        import lint_case
+        results, n = lint_case.lint(lint_case.events_from_spec(self.CASE_MD))
+        self.assertEqual(n, 1)
+        self.assertEqual([r for r in results if r[0] == "ERROR"], [])
+
+    def test_example_case_cards_verify(self):
+        spec = build_docx.load_spec(self.CASE_MD)
+        cards = [i for i in spec["items"] if i["type"] == "card"]
+        self.assertEqual(len(cards), 6)
+        base = os.path.dirname(self.CASE_MD)
+        for card in cards:
+            with open(os.path.join(base, card["cite"]["source"]), encoding="utf-8") as f:
+                self.assertIsNone(verify_quotes.verify_card(card, f.read()))
+
+    def test_one_card_contention_fails(self):
+        import lint_case
+        events = [("heading", 2, "Contention one: X"),
+                  ("analytic", 0, "Our claim is X."),
+                  ("card", 0, "Only card")]
+        results, _ = lint_case.lint(events)
+        msgs = " ".join(r[2] for r in results)
+        self.assertIn("only 1 card", msgs)
+        self.assertIn("no chain map", msgs)
+
+    def test_missing_step_flagged(self):
+        import lint_case
+        events = [("heading", 2, "Contention one: X"),
+                  ("analytic", 0, "Chain: UQ (A) -> IMPACT (B)")] + \
+                 [("card", 0, "c%d" % i) for i in range(4)]
+        results, _ = lint_case.lint(events)
+        msgs = " ".join(r[2] for r in results)
+        self.assertIn("no LINK step", msgs)
+        self.assertIn("no SOLVENCY step", msgs)
+
+    def test_neg_does_not_require_solvency(self):
+        import lint_case
+        events = [("heading", 2, "DA: X"),
+                  ("analytic", 0, "Chain: UQ (A) -> LINK (B) -> IMPACT (C)")] + \
+                 [("card", 0, "c%d" % i) for i in range(4)]
+        results, _ = lint_case.lint(events, aff=False)
+        self.assertEqual([r for r in results if r[0] == "ERROR"], [])
+
+    def test_step_without_card_flagged(self):
+        import lint_case
+        events = [("heading", 2, "Contention one: X"),
+                  ("analytic", 0, "Chain: UQ (A) -> TREND (B) -> LINK (C) -> IL (D) -> IMPACT (E) -> SOLVENCY (F)")] + \
+                 [("card", 0, "c%d" % i) for i in range(4)]
+        results, _ = lint_case.lint(events)
+        self.assertTrue(any("step has no card" in r[2] for r in results))
+
+    def test_long_analytic_warns(self):
+        import lint_case
+        events = [("heading", 2, "Contention one: X"),
+                  ("analytic", 0, "Chain: UQ (A) -> LINK (B) -> IMPACT (C) -> SOLVENCY (D)"),
+                  ("analytic", 0, " ".join(["word"] * 120))] + \
+                 [("card", 0, "c%d" % i) for i in range(4)]
+        results, _ = lint_case.lint(events)
+        self.assertTrue(any(r[0] == "WARN" and "long analytic" in r[2] for r in results))

@@ -19,12 +19,13 @@ Read in this order. The first four steps apply to every task; step 5 depends on 
 | 6 | `core/cite-format.md` | The two cite styles and every required field |
 | 7 | `docs/what-good-looks-like.md` | An annotated real block, and exactly what went wrong in a test run |
 | 8 | `core/source-evaluation.md` and `core/research-protocol.md` | How to find, rate, and save sources |
+| 9 | `core/argument-structure.md` | For cases, DAs, and any argument with causal steps: the link-chain standard (uniqueness, link, internal link, impact, solvency), the chain map, and impact framing vs. weighing |
 
 ## Then the protocol for your task
 
 | You are writing... | Read |
 |--------------------|------|
-| A constructive case | `speeches/case/PROTOCOL.md` |
+| A constructive case, DA, or any chained argument | `core/argument-structure.md`, `speeches/case/PROTOCOL.md`, and `templates/case-skeleton.md` |
 | A rebuttal to an opposing case | `speeches/rebuttal/PROTOCOL.md` |
 | Frontlines (defending your own arguments) | `speeches/frontlines/PROTOCOL.md` |
 | Blocks / A2 files (answering their arguments) | `speeches/blocks/PROTOCOL.md` and `templates/block-skeleton.md` |
@@ -47,6 +48,7 @@ python tools/verify_quotes.py file.md --strict
 python tools/lint_cites.py file.md
 python tools/lint_cards.py file.md
 python tools/lint_blocks.py file.md        # blocks and frontlines
+python tools/lint_case.py file.md          # cases and DAs (add --neg for Neg)
 python tools/speech_timer.py file.docx --wpm 300 --limit <seconds>
 ```
 

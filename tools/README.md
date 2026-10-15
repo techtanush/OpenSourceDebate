@@ -104,6 +104,15 @@ python tools/lint_blocks.py spec.md      # or: python tools/lint_blocks.py file.
 
 Checks every Block (Heading 3): it must contain actual cut cards, every Tag must have a card under it, and it must open with a statement of the opposing argument ("Aff Argument: ...") before the answers. Warns on fewer than two answers or no closing analytic. Exit 1 on any error. Block anatomy: `speeches/blocks/PROTOCOL.md`.
 
+## lint_case.py
+
+```bash
+python tools/lint_case.py case.md          # Aff case (solvency required)
+python tools/lint_case.py case.docx --neg  # Neg case / DAs
+```
+
+Checks every contention (a Hat or Block titled "Contention...", "C1...", "Advantage...", "DA..."): at least four cards, a chain map (`Chain: UQ (Card) -> LINK (Card) -> IMPACT (Card) ...`) before the first card, UQ / LINK / IMPACT (and SOLVENCY for Aff) present in the map, and at least as many cards as steps. Warns on long analytics (over 90 words). Exit 1 on any error. Standard: `core/argument-structure.md`.
+
 ## lint_cards.py
 
 ```bash
