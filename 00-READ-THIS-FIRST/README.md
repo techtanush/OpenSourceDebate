@@ -22,7 +22,7 @@ A toolkit that teaches an AI coding agent (**Claude Code**, **Codex**, or simila
 
 1. **Never fabricate.** Quotes are verbatim from a saved source. Anything unverified is labeled UNVERIFIED (`core/integrity.md`).
 2. **Cut real cards.** Tag, full cite, body with context around the read text, only the key words read (`core/cutting-rules.md`).
-3. **Contentions are chains of cards.** Every step (problem now, link, internal links, impact, solvency) has its own card, and a chain map names them (`core/argument-structure.md`). One card plus explanation is not a contention.
+3. **Cards first; on the Aff, every impact needs solvency.** Evidence does the arguing; analytics only connect cards and show the *resolution itself* causes the impact to fall (`Solvency:`). **Contentions are chains of cards.** Every step (problem now, link, internal links, impact, solvency) has its own card, and a chain map names them (`core/argument-structure.md`). One card plus explanation is not a contention.
 4. **Blocks hold the actual cards.** A block states the opposing argument, numbers the answers, puts a cut card under each, and closes with a link or turn. Analytics never replace cards (`speeches/blocks/PROTOCOL.md`).
 5. **Check the work.** Run the tools before delivering (below).
 6. **Be honest about weaknesses.** End every deliverable with a "Before you read these" list.

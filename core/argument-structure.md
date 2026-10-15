@@ -25,6 +25,25 @@ For a disadvantage, the same parts apply from the other side: UQ (things are fin
 6. **Analytics connect cards; they are not evidence.** Keep them to a sentence or two between cards. A long analytic paragraph that stands in for a missing card does not count as support.
 7. **Hedged evidence is fine if you say how far it goes.** If a card is a London study and your plan is a different city, state the limit in one sentence and add a second card (from a different place or method) so the chain does not rest on a single analogy.
 
+## Solvency: the Aff must prove the resolution causes the impact
+
+On the Aff, **every impact you claim needs solvency**: evidence that *the resolution itself* will actually reduce that impact. Showing that a problem is large is not enough, and showing that a similar action elsewhere helped is not enough unless you tie it to the resolution.
+
+1. **No impact without solvency.** If a contention ends in an impact (deaths, damage, cost), a SOLVENCY card in that contention must show the resolution fixes *that* problem. If a contention has two scenarios from two different problems, each needs its own solvency.
+2. **Solvency is about the resolution, not about the problem.** Cards that only say "the problem is bad" or "this action worked somewhere" are UQ and LINK. The SOLVENCY card shows implementation of what the resolution requires and its effect.
+3. **Write the solvency sentence.** Every Aff contention ends with a short analytic that starts `Solvency:` and says how the resolution produces the reduction, tied to the card: *"Solvency: <what the resolution does> removes <the cause>, and <card> shows <the impact> falls when it does."* This sentence is the one place an analytic is required.
+4. **Make the card match the plan.** If the resolution requires a phase-in, permits, or funding, the solvency card should come from a case that did the same, or the analytic must say how the evidence transfers and what it does not show.
+5. **Neg equivalent:** the Neg must prove the resolution causes the harm it claims. The DA link card has to be about the resolution's actual requirements, not a general similar action.
+
+## Cards first, analytics last
+
+Evidence does the arguing. Analytics only connect and clarify, and on the Aff their main job is the `Solvency:` sentence.
+
+- **Allowed analytics in a contention:** the chain map, one `Solvency:` sentence or two, and an optional one-sentence impact framing (size, who is affected, timeframe).
+- **Everything else should be a card.** If you want to explain the mechanism, find the card that explains it. If you want to claim a number, find the card with the number.
+- **Budget:** analytics should be a small fraction of what is spoken. `tools/lint_case.py` warns above 30% and fails above 50% of (analytic words + words read from cards). An analytic over about 60 words is a warning.
+- **Don't write a paragraph of explanation under each card.** A one-line "source note" to flag a limit is fine; a paragraph is a sign the card is missing.
+
 ## The chain map
 
 Open every contention with a one-line analytic that names each step and the card that proves it. This is the checklist for you and for any reader:
@@ -33,7 +52,7 @@ Open every contention with a one-line analytic that names each step and the card
 Chain: UQ (Reyes 25) -> LINK (Whitfield 24) -> IL (Park 23) -> IMPACT (WHO 24) -> SOLVENCY (Larkspur 25)
 ```
 
-Use these step names: `UQ`, `TREND`, `LINK`, `IL`, `IMPACT`, `SOLVENCY`. `tools/lint_case.py` reads this line and checks it against the cards that follow.
+Use these step names: `UQ`, `TREND`, `LINK`, `IL`, `IMPACT`, `SOLVENCY`. `tools/lint_case.py` reads this line and checks it against the cards that follow. For a contention with two scenarios, list each impact and its solvency, e.g. `... -> IMPACT (A) -> IMPACT (B) -> SOLVENCY (C)`.
 
 ## Testing a chain
 
@@ -60,6 +79,7 @@ Before delivering a case or a DA, run this test:
 | Impact has no number or timeframe | Add a magnitude card |
 | Everything rests on one analogy | Add an independent second source |
 | Long analytics doing the evidence's job | Replace each with a card, keep one connecting sentence |
-| No solvency | Add evidence the plan works when implemented |
+| No solvency, or solvency for a different problem | Add a card showing the resolution itself fixes this impact, plus the `Solvency:` sentence |
+| Paragraphs of analytics under each card | Delete them, find the missing card, keep one connecting sentence |
 
 Run `python tools/lint_case.py case.md` to check structure.

@@ -8,8 +8,6 @@
 
 > Chain: UQ (<Card A>) -> TREND (<Card B>) -> LINK (<Card C>) -> IL (<Card D>) -> IMPACT (<Card E>) -> SOLVENCY (<Card F>)
 
-> Our contention: <one or two sentences naming the chain in plain words>
-
 ### UQ: the problem now
 
 #### UQ: <tag: the problem, with a number>
@@ -52,13 +50,15 @@ Context before. ==The words you will read aloud.== Context after, including any 
 
 (card)
 
-> Impact framing (1-2 sentences): size, who is affected, timeframe, reversibility. Leave head-to-head comparison to the rebuttals.
+> Impact: <one sentence: size, who is affected, timeframe, reversibility>. Leave head-to-head comparison to the rebuttals.
 
 ### SOLVENCY: it works when implemented
 
 #### SOLVENCY: <tag: evidence the plan works>
 
-(card)
+(card; from a case that did what the resolution requires, or say how the evidence transfers)
+
+> Solvency: <how the resolution itself causes this impact to fall, tied to the solvency card; on the Aff every contention needs this>
 
 ## Contention 2: <claim>
 

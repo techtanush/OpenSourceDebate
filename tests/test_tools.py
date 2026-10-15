@@ -310,3 +310,32 @@ class LintCaseTests(unittest.TestCase):
                  [("card", 0, "c%d" % i) for i in range(4)]
         results, _ = lint_case.lint(events)
         self.assertTrue(any(r[0] == "WARN" and "long analytic" in r[2] for r in results))
+
+
+class LintCaseSolvencyTests(unittest.TestCase):
+    def _chain(self, extra):
+        return [("heading", 2, "Contention one: X"),
+                ("analytic", 0, "Chain: UQ (A) -> LINK (B) -> IMPACT (C) -> SOLVENCY (D)")] + extra + \
+               [("card", 0, "c%d" % i, 40) for i in range(4)]
+
+    def test_aff_requires_solvency_analytic(self):
+        import lint_case
+        results, _ = lint_case.lint(self._chain([]))
+        self.assertTrue(any("Solvency:" in r[2] for r in results))
+
+    def test_solvency_analytic_satisfies(self):
+        import lint_case
+        results, _ = lint_case.lint(self._chain([("analytic", 0, "Solvency: the resolution removes the cause.")]))
+        self.assertEqual([r for r in results if r[0] == "ERROR"], [])
+
+    def test_analytics_outweighing_cards_fail(self):
+        import lint_case
+        big = " ".join(["word"] * 55)
+        ev = [("analytic", 0, "Solvency: " + big)] + [("analytic", 0, big) for _ in range(6)]
+        results, _ = lint_case.lint(self._chain(ev))
+        self.assertTrue(any(r[0] == "ERROR" and "analytics are" in r[2] for r in results))
+
+    def test_neg_needs_no_solvency_analytic(self):
+        import lint_case
+        results, _ = lint_case.lint(self._chain([]), aff=False)
+        self.assertFalse(any("Solvency:" in r[2] for r in results))

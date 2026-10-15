@@ -60,6 +60,10 @@ python tools/verify_quotes.py examples/example-case.md --strict
 
 Read `core/argument-structure.md` alongside it. Built Word versions are checked in as `examples/example-case.docx` and `examples/example-case-DRAFT.docx`.
 
+## 4c. A real 1AC mapped to the chain standard (private reference)
+
+`reference/opponent-files/opponent-1AC-example.docx` is a real opposing 1AC. `docs/real-1ac-chain-walkthrough.md` maps each tag and card to UQ, TREND, LINK, IL, IMPACT, and SOLVENCY, with card counts and how much of each card is read. Run `python tools/inspect_docx.py reference/opponent-files/opponent-1AC-example.docx --cards` to see the cites and highlighted text yourself.
+
 ## 5. A real blocks file (private reference)
 
 `reference/example-blocks/example-blocks-excerpt.docx`: about 6,000 words from a real team blocks file (15 blocks). Study its shape, then read the annotated walkthrough in `docs/what-good-looks-like.md`.

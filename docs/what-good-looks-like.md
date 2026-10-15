@@ -58,9 +58,10 @@ A second test run built a 1AC with three contentions. It had about **one or two 
 | **A link chain**: no card for each causal step | A mechanism written as prose is an assertion the opponent can simply deny |
 | **Impact with a number and a timeframe** | "Fewer injuries" is a direction, not a weighable impact |
 | **Solvency**: no card showing the plan works as implemented | The case argues benefits but not that this plan delivers them |
-| **Cards instead of essays**: long analytics doing the evidence's job | Analytics connect cards; they are not evidence |
+| **Cards instead of essays**: long analytics doing the evidence's job | Analytics connect cards; they are not evidence. Cards first. |
+| **Aff solvency**: nothing showing the *resolution itself* would cause the impact to fall | An Aff that proves a big problem but not that its resolution fixes it has not made the case |
 
-For comparison, the real constructives in `reference/` carry roughly six to eight cards per contention: the problem now, how fast it is growing, the key scale number, the mechanism, the consequence, the terminal impact, and solvency. `python tools/lint_case.py` on the agent's case reported 6 errors and 2 warnings; `python tools/lint_case.py examples/example-case.md` reports none.
+For comparison, the real opposing 1AC in `reference/` (mapped step by step in `docs/real-1ac-chain-walkthrough.md`) carries eight and seven cards in its two contentions, reads only about 5-15% of each card, and has no analytic paragraphs between cards. Those contentions carry roughly six to eight cards each: the problem now, how fast it is growing, the key scale number, the mechanism, the consequence, the terminal impact, and solvency. `python tools/lint_case.py` on the agent's case reported 12 errors and 11 warnings, including that analytics were 72-89% of what each contention would have spoken (404 analytic words against 49 read from cards in the first one) and that no contention had a solvency statement; `python tools/lint_case.py examples/example-case.md` reports none.
 
 The target shape (see `examples/example-case.md`, a fictional contention):
 
@@ -76,7 +77,7 @@ IMPACT    card: 7,310 urban pedestrian/cyclist deaths, a four-decade high; >$140
 SOLVENCY  card: a city that did it with a phase-in cut core injuries 40%
 ```
 
-Every arrow is a card. Read `core/argument-structure.md` for the standard and for how impact framing (in the constructive) differs from head-to-head weighing (in the rebuttals).
+Every arrow is a card. On the Aff the contention ends with a `Solvency:` analytic showing the resolution itself causes the impact to fall. Read `core/argument-structure.md` for the standard and for how impact framing (in the constructive) differs from head-to-head weighing (in the rebuttals).
 
 ## Checks before delivering
 

@@ -45,6 +45,6 @@ I. Final report. End with the repo's "Before you read these" caveats: anything u
 | Verify (E) | Runs every checker and tests, shows real output, fixes failures | Claims verification without running the tools |
 | Cross-ex (F) | Closed-ended, one idea per question, tied to specific claims | Vague or leading questions |
 | Timer (G) | Runs `speech_timer.py` and trims if over | Guesses the time |
-| Case (H) | Chain map plus a card for every step; link and impact are cards, impact has a number; `lint_case.py` passes | One or two cards and long analytic paragraphs; no uniqueness or solvency |
+| Case (H) | Chain map plus a card for every step; link, impact, and solvency are cards; a short `Solvency:` analytic ties the resolution to the impact; analytics are a small share; `lint_case.py` passes | One or two cards and long analytic paragraphs; no uniqueness; no solvency for the resolution |
 | Report (I) | Plain list of weaknesses and any doc/tool problems | "Everything looks great" |
 | Viewing | Says formatting only shows in an editor that supports it (CardMirror, Verbatim) | Says to check it in TextEdit |

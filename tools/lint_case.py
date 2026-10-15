@@ -13,6 +13,11 @@ A "contention" is a Hat (Heading 2) or Block (Heading 3) whose title starts with
           each step, e.g.  Chain: UQ (Reyes 25) -> LINK (Whitfield 24) -> IMPACT (WHO 24)
   ERROR   chain map is missing UQ, LINK, or IMPACT (and SOLVENCY for an Aff case)
   ERROR   fewer cards than steps named in the chain map (a step with no card)
+  ERROR   (Aff) no "Solvency:" analytic: a short statement of how the resolution itself
+          causes the impact to be reduced, tied to the SOLVENCY card
+  ERROR   analytics outweigh evidence: analytic words are more than MAX_ANALYTIC_SHARE of
+          (analytic words + words actually read from cards)
+  WARN    analytics are a large share of the contention (over WARN_ANALYTIC_SHARE)
   WARN    a long analytic (over MAX_ANALYTIC_WORDS words): evidence should carry that work
 
 Step names: UQ, TREND, LINK, IL, IMPACT, SOLVENCY. See core/argument-structure.md.
@@ -26,7 +31,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 MIN_CARDS = 4
-MAX_ANALYTIC_WORDS = 90
+MAX_ANALYTIC_WORDS = 60
+WARN_ANALYTIC_SHARE = 0.30
+MAX_ANALYTIC_SHARE = 0.50
 STEP_RE = re.compile(r"\b(UQ|TREND|LINK|IL|IMPACT|SOLVENCY)\b")
 CONTENTION_RE = re.compile(r"^\s*(contention|c\d+\b|advantage|adv\b|da\b|disad)", re.I)
 
@@ -40,7 +47,9 @@ def events_from_spec(path):
         if t in level:
             out.append(("heading", level[t], item["text"]))
         elif t == "card":
-            out.append(("card", 0, item["tag"]))
+            from verify_quotes import body_runs_any
+            read = sum(len(txt.split()) for txt, m in body_runs_any(item) if m == "read")
+            out.append(("card", 0, item["tag"], read))
         elif t == "analytic":
             out.append(("analytic", 0, item["text"]))
     return out
@@ -61,7 +70,11 @@ def events_from_docx(path):
             while j < len(paras) and not paras[j]["runs"]:
                 j += 1
             if j < len(paras) and paras[j]["style"] == "Normal":
-                out.append(("card", 0, text))
+                read, k = 0, j + 1
+                while k < len(paras) and paras[k]["style"] == "Normal":
+                    read += sum(len(r["text"].split()) for r in paras[k]["runs"] if r["highlight"])
+                    k += 1
+                out.append(("card", 0, text, read))
     return out
 
 
@@ -69,7 +82,8 @@ def sections(events):
     """Split events into contention sections: dicts with title, level, items."""
     secs = []
     cur = None
-    for kind, level, text in events:
+    for ev in events:
+        kind, level, text = ev[0], ev[1], ev[2]
         if kind == "heading":
             if cur is not None and level <= cur["level"]:
                 cur = None
@@ -77,7 +91,7 @@ def sections(events):
                 cur = {"title": text, "level": level, "items": []}
                 secs.append(cur)
         elif cur is not None:
-            cur["items"].append((kind, text))
+            cur["items"].append((kind, text, ev[3] if len(ev) > 3 else 0))
     return secs
 
 
@@ -86,13 +100,13 @@ def lint(events, aff=True):
     secs = sections(events)
     for s in secs:
         title, items = s["title"], s["items"]
-        cards = [t for k, t in items if k == "card"]
+        cards = [t for k, t, _ in items if k == "card"]
         if len(cards) < MIN_CARDS:
             results.append(("ERROR", title,
                             "only %d card(s); a contention needs a chain of at least %d" %
                             (len(cards), MIN_CARDS)))
-        first_card = next((n for n, (k, _) in enumerate(items) if k == "card"), len(items))
-        chain = next((t for k, t in items[:first_card]
+        first_card = next((n for n, (k, _, _) in enumerate(items) if k == "card"), len(items))
+        chain = next((t for k, t, _ in items[:first_card]
                       if k == "analytic" and re.match(r"^\s*chain\s*:", t, re.I)), None)
         if chain is None:
             results.append(("ERROR", title,
@@ -108,13 +122,33 @@ def lint(events, aff=True):
                 results.append(("ERROR", title,
                                 "chain map names %d steps but there are only %d cards: "
                                 "a step has no card" % (len(steps), len(cards))))
-        for k, t in items:
-            if k == "analytic" and not re.match(r"^\s*chain\s*:", t, re.I):
-                n = len(t.split())
-                if n > MAX_ANALYTIC_WORDS:
-                    results.append(("WARN", title,
-                                    "long analytic (%d words): evidence should carry this: %r" %
-                                    (n, t[:60])))
+        analytics = [t for k, t, _ in items
+                     if k == "analytic" and not re.match(r"^\s*chain\s*:", t, re.I)]
+        if aff and not any(re.match(r"^\s*solvency\s*:", t, re.I) for t in analytics):
+            results.append(("ERROR", title,
+                            "no 'Solvency:' analytic: state in a sentence or two how the "
+                            "resolution itself causes this impact to be reduced"))
+        for t in analytics:
+            n = len(t.split())
+            if n > MAX_ANALYTIC_WORDS:
+                results.append(("WARN", title,
+                                "long analytic (%d words): evidence should carry this: %r" %
+                                (n, t[:60])))
+        a_words = sum(len(t.split()) for t in analytics)
+        read_words = sum(r for k, _, r in items if k == "card")
+        total = a_words + read_words
+        if total:
+            share = a_words / total
+            if share > MAX_ANALYTIC_SHARE:
+                results.append(("ERROR", title,
+                                "analytics are %d%% of what is spoken (%d analytic words vs %d "
+                                "read from cards): replace analytics with cards" %
+                                (round(share * 100), a_words, read_words)))
+            elif share > WARN_ANALYTIC_SHARE:
+                results.append(("WARN", title,
+                                "analytics are %d%% of what is spoken (%d vs %d read from "
+                                "cards): lean harder on cards" %
+                                (round(share * 100), a_words, read_words)))
     return results, len(secs)
 
 
