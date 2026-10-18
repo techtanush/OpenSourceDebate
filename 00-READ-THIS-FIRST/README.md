@@ -18,7 +18,7 @@ A toolkit that teaches an AI coding agent (**Claude Code**, **Codex**, or simila
 | **A debater** setting it up | This page, then [reading-order.md](reading-order.md) and the Quick start below |
 | **Someone improving the repo** | [reading-order.md](reading-order.md), `CONTRIBUTING.md`, `docs/agent-smoke-test.md`, `docs/fresh-session-test-prompt.md` |
 
-## The seven rules everything follows
+## The rules everything follows
 
 1. **Never fabricate.** Quotes are verbatim from a saved source. Anything unverified is labeled UNVERIFIED (`core/integrity.md`).
 2. **Cut real cards.** Tag, full cite, body with context around the read text, only the key words read (`core/cutting-rules.md`).
@@ -26,8 +26,11 @@ A toolkit that teaches an AI coding agent (**Claude Code**, **Codex**, or simila
 4. **Blocks hold the actual cards.** A block states the opposing argument, numbers the answers, puts a cut card under each, and closes with a link or turn. Analytics never replace cards (`speeches/blocks/PROTOCOL.md`).
 5. **Check the work.** Run the tools before delivering (below).
 6. **Be honest about weaknesses.** End every deliverable with a "Before you read these" list.
-
 7. **The whole must flow.** Read the tags as a story (`tools/tag_story.py`, `core/logic-flow.md`): each step follows from the last, the numbers fit, nothing contradicts.
+8. **Research slot by slot.** Start from the chain map, not the topic: find a card for each step, with a backup and a known weakness (`core/research-guide.md`).
+9. **Answer their specific cards,** using the text around their highlighting and their own evidence; rank two to four answers and make them consistent (`core/refutation-guide.md`).
+10. **Know the judge.** Lay judges get a plain sentence after each card and fewer, stronger answers; tech judges get layers and weighing (`core/judge-adaptation.md`).
+11. **Use what the user already has.** Search and reuse their library, merge into existing blocks, match their headings (`core/file-organization.md`, `playbooks/06-use-my-files-as-context.md`).
 
 ## Quick start (about ten minutes)
 
@@ -61,13 +64,14 @@ Using an agent: open Claude Code (or Codex) **in this folder** and ask for a tas
 |------|-----------|
 | `00-READ-THIS-FIRST/` | This folder: orientation, reading order, examples in order |
 | `AGENTS.md`, `CLAUDE.md` | Agent entry points; `AGENTS.md` has the task-to-protocol routing table |
-| `core/` | Rules every task follows: integrity, card anatomy, cutting rules, cite format, source evaluation, research protocol, glossary |
-| `speeches/` | One protocol per kind of file: `case/`, `rebuttal/`, `frontlines/`, `blocks/`, `crossx/`, `summary-final/`, `prep/` |
+| `core/` | Rules every task follows: integrity, card anatomy, cutting rules, cite format, source evaluation, **research guide**, **argument structure (link chains)**, **logic flow**, **refutation guide**, **judge adaptation**, **file organization**, glossary |
+| `playbooks/` | **End-to-end procedures**: case from scratch, answer an opposing case, blocks library, frontlines, backlines and summary, use the user's files as context |
+| `speeches/` | One protocol per kind of file: `case/`, `rebuttal/`, `frontlines/`, `blocks/`, `backlines/`, `crossx/`, `summary-final/`, `prep/` |
 | `formats/` | Speech order and times for Policy, LD, PF, plus a template for your league |
 | `skills/` | Claude Code skills (thin wrappers that point to the protocols above) |
-| `tools/` | Python tools (no installs): `build_docx`, `inspect_docx`, `verify_quotes`, `lint_cites`, `lint_cards`, `lint_blocks`, `lint_case`, `speech_timer`; see `tools/README.md` |
+| `tools/` | Python tools (no installs): `build_docx`, `inspect_docx`, `library` (index/search the user's files), `verify_quotes`, `lint_cites`, `lint_cards`, `lint_blocks`, `lint_case`, `tag_story`, `speech_timer`; see `tools/README.md` |
 | `templates/` | Blank starter files, including `block-skeleton.md` |
-| `examples/` | A fictional worked example: source article, card spec, built `.docx` (final and draft) |
+| `examples/` | A fictional worked example (source, card spec, built `.docx`), a fictional case chain, and `good-vs-bad/` with annotated bad and good link chains, cards, rebuttals, and analytics |
 | `docs/` | `what-good-looks-like.md`, `agent-smoke-test.md`, `fresh-session-test-prompt.md` |
 | `reference/` | **Private-repo only:** real example blocks and two real opposing files, for studying structure |
 | `tests/` | Unit tests for the tools |

@@ -6,6 +6,8 @@ Read first: `core/research-protocol.md`, `core/source-evaluation.md`.
 
 ## 1. Understand the topic
 
+Use the topic map in `core/research-guide.md` (section 2b) to decide what kinds of evidence to gather for the resolution, and the full research method in `core/research-guide.md` for how to search.
+
 1. Write the resolution and define every key term. Use authoritative definitions and note where meaning is contested.
 2. Identify **who** is affected, **what** changes, **how** it would work, and **what already exists** (status quo).
 3. Collect 5-10 foundational sources (agency reports, major studies, recent news). Save full text to `sources/`.

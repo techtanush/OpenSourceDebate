@@ -14,6 +14,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `core/card-anatomy.md`
 - `core/cite-format.md`
 
+## Playbook
+
+The detailed procedure and examples: `playbooks/01-case-from-scratch.md (steps 5-7) and core/cutting-rules.md; examples/good-vs-bad/cards.md`
+
 ## Steps
 
 1. Get the claim (tag) and the source. Save the full source text to `sources/<shortcite>.txt`.

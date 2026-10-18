@@ -13,6 +13,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `core/research-protocol.md`
 - `core/integrity.md`
 
+## Playbook
+
+The detailed procedure and examples: `playbooks/03-blocks-library.md; core/file-organization.md; examples/good-vs-bad/rebuttals.md`
+
 ## Steps
 
 1. State the opposing argument fairly, with the evidence they would read.

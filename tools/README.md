@@ -102,7 +102,7 @@ Flags missing name, author, quals, date, title, URL, DOA, or initials, and short
 python tools/lint_blocks.py spec.md      # or: python tools/lint_blocks.py file.docx
 ```
 
-Checks every Block (Heading 3): it must contain actual cut cards, every Tag must have a card under it, and it must open with a statement of the opposing argument ("Aff Argument: ...") before the answers. Warns on fewer than two answers or no closing analytic. Exit 1 on any error. Block anatomy: `speeches/blocks/PROTOCOL.md`.
+Checks every Block (Heading 3): it must contain actual cut cards, every Tag must have a card under it, and it must open with a statement of the opposing argument ("Aff Argument: ...") before the answers. Warns on fewer than two answers or no closing analytic. With `--lay` (lay or parent judges) it also warns when a card has no plain analytic right after it, or an analytic reads like an AI label ("Lay version", "Simply put") or uses arrows. Exit 1 on any error. Block anatomy: `speeches/blocks/PROTOCOL.md`.
 
 ## lint_case.py
 
@@ -112,6 +112,16 @@ python tools/lint_case.py case.docx --neg  # Neg case / DAs
 ```
 
 Checks every contention (a Hat or Block titled "Contention...", "C1...", "Advantage...", "DA..."): at least four cards, a chain map (`Chain: UQ (Card) -> LINK (Card) -> IMPACT (Card) ...`) before the first card, UQ / LINK / IMPACT (and SOLVENCY for Aff) present in the map, and at least as many cards as steps. Also requires an Aff `Solvency:` analytic, fails when analytics outweigh cards, and checks flow: steps in logical order, chain-map card names match the cards in order, and numbers in analytics appear in a card (warning). Warns on long analytics (over 60 words). Exit 1 on any error. Standard: `core/argument-structure.md`.
+
+## library.py
+
+```bash
+python tools/library.py index <folder> -o library-index.md   # map every card in the user's .docx files
+python tools/library.py search <folder> <term> [<term> ...] [--text] [--limit 20]
+python tools/library.py outline <file.docx>                  # one file's headings with card counts
+```
+
+Read-only. Use it before researching: reuse existing cards, merge new evidence into existing blocks, learn the team's headings, and see what was already read. See `playbooks/06-use-my-files-as-context.md`.
 
 ## tag_story.py
 

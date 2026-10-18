@@ -13,6 +13,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `core/integrity.md`
 - `core/cutting-rules.md`
 
+## Playbook
+
+The detailed procedure and examples: `playbooks/04-frontlines.md; core/file-organization.md`
+
 ## Steps
 
 1. Read the constructive first and note which cards were already read.

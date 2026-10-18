@@ -12,13 +12,14 @@ There is **no AI API and no key** in this repo. Your own agent does the searchin
 
 | Folder | What it is |
 |--------|-----------|
-| `core/` | Rules every task follows: integrity, card anatomy, cite format, cutting and highlighting rules, source evaluation, research protocol, glossary |
-| `speeches/` | One protocol per kind of file: `case/`, `rebuttal/`, `frontlines/`, `blocks/`, `crossx/`, `summary-final/`, `prep/` |
+| `core/` | Rules and guides every task follows: integrity, card anatomy, cite format, cutting rules, **research guide**, **argument structure (link chains)**, **logic flow**, **refutation guide**, **judge adaptation (lay vs. tech)**, **file organization (blocks / frontlines / backlines)**, source evaluation, glossary |
+| `playbooks/` | **End-to-end procedures** for the jobs people ask for: build a case, answer an opposing case, build blocks, build frontlines, backlines and summary, use the user's files as context |
+| `speeches/` | One protocol per kind of file: `case/`, `rebuttal/`, `frontlines/`, `blocks/`, `backlines/`, `crossx/`, `summary-final/`, `prep/` |
 | `formats/` | Speech order and times for Policy, LD, and PF, plus a template for your own league |
 | `skills/` | Claude Code skills that wrap the protocols (cut-card, research-evidence, build-case, write-rebuttal, build-frontlines, make-blocks, crossx-questions, verify-card, import-team-files) |
-| `tools/` | Python (standard library only): build `.docx`, inspect existing files, verify quotes, lint cites, time speeches |
+| `tools/` | Python (standard library only): build `.docx`, inspect and search existing files, verify quotes, lint cites/cards/blocks/cases, test logic flow, time speeches |
 | `templates/` | Blank starter `.docx` files (case, blocks, frontlines) with the Verbatim styles |
-| `examples/` | A small fictional example: source article, card spec, generated `.docx` (final and `-DRAFT` cutting copy) |
+| `examples/` | Fictional worked examples (source, card spec, case chain, built `.docx`) and `good-vs-bad/` with annotated bad vs. good link chains, cards, rebuttals, and analytics |
 | `docs/` | `what-good-looks-like.md` (block anatomy from real files) and the agent smoke test |
 | `reference/` | **Private-repo only:** real example blocks and real opposing files for studying structure. Delete before making the repo public. |
 

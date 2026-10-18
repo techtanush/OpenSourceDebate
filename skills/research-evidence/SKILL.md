@@ -13,6 +13,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `core/source-evaluation.md`
 - `core/integrity.md`
 
+## Playbook
+
+The detailed procedure and examples: `core/research-guide.md (the full method) and playbooks/06-use-my-files-as-context.md (search the user's files first)`
+
 ## Steps
 
 1. Restate the claim as a tag-shaped sentence and what a strong source would be.

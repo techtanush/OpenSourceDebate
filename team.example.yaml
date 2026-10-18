@@ -3,3 +3,12 @@ cutter_initials: AB          # appears in the cite tail of every card you cut
 cite_style: frontline        # frontline = [bracketed] cite, case = (parenthesized) cite
 format: policy               # which file in formats/ you debate in
 wpm: 250                     # your typical reading speed
+
+# Used by agents (not by the Python tools). All optional.
+judge: lay                   # lay | tech | mixed; changes how much plain explanation each card gets
+rebuttal_1_minutes_per_contention: 2     # lay default: about 2:00 per contention in the first rebuttal
+rebuttal_2_minutes_per_contention: 1     # about 1:00 per contention in the second rebuttal
+blocks_dir: Blocks           # speech-ready answers to the opponent's case
+frontlines_dir: Frontlines   # defense of our own case
+library_dir: Library         # full evidence library of blocks
+keep_headings: yes           # add evidence under existing headings; do not rename or reorder them

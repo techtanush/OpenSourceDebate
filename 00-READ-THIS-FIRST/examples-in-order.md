@@ -60,6 +60,24 @@ python tools/verify_quotes.py examples/example-case.md --strict
 
 Read `core/argument-structure.md` alongside it. Then run `python tools/tag_story.py examples/example-case.md` and read only the tags and numbers as a judge would, with `core/logic-flow.md` open. Built Word versions are checked in as `examples/example-case.docx` and `examples/example-case-DRAFT.docx`.
 
+## 4b-2. Good vs. bad pairs (fictional)
+
+`examples/good-vs-bad/` has annotated pairs with working files. Read [examples/good-vs-bad/README.md](../examples/good-vs-bad/README.md), then in this order:
+
+1. `examples/good-vs-bad/link-chains.md`: nine bad chains (one card and an essay, a missing middle, a scope mismatch, a link written as prose, an impact with no number, solvency for a different problem, padding, a contradiction, hedged into nothing), each with its fix, plus a good Aff chain, a good Neg DA chain, and a good turn chain.
+2. `examples/good-vs-bad/cards.md`: bad and good cutting: the lone sentence, the cut-out qualifier, the tag that overclaims, fragmented highlighting, a snippet used as a card, a weak cite.
+3. `examples/good-vs-bad/rebuttals.md`: the same argument answered badly and well; how the good answer was found.
+4. `examples/good-vs-bad/analytics.md`: bad analytics (essay, AI label, invented number) and good ones; lay vs. tech versions.
+
+Then run the tools to see them pass and fail:
+
+```bash
+python tools/lint_blocks.py examples/good-vs-bad/rebuttal-good.md --lay     # passes
+python tools/lint_blocks.py examples/good-vs-bad/rebuttal-bad.md            # fails
+python tools/lint_case.py examples/example-case.md                          # passes
+python tools/lint_case.py examples/good-vs-bad/case-bad.md                  # fails
+```
+
 ## 4c. A real 1AC mapped to the chain standard (private reference)
 
 `reference/opponent-files/opponent-1AC-example.docx` is a real opposing 1AC. `docs/real-1ac-chain-walkthrough.md` maps each tag and card to UQ, TREND, LINK, IL, IMPACT, and SOLVENCY, with card counts and how much of each card is read. Run `python tools/inspect_docx.py reference/opponent-files/opponent-1AC-example.docx --cards` to see the cites and highlighted text yourself.
@@ -83,7 +101,8 @@ What to notice: every block states the opposing argument, numbers its answers, p
 ## 7. Test it on a fresh agent
 
 - `docs/agent-smoke-test.md`: a short hand test.
-- `docs/fresh-session-test-prompt.md`: a hard, multi-part prompt for a brand-new session, with a grading sheet.
+- `docs/fresh-session-test-prompt.md`: a hard, multi-part prompt for a brand-new session (build blocks and a case), with a grading sheet.
+- `docs/fresh-session-test-prompt-2.md`: a harder one: answer a real opposing case using the user's own files as context, with a grading sheet.
 
 ## The mistakes to avoid (from a real test run)
 

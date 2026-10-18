@@ -2,7 +2,7 @@
 
 A **block** is a prepared set of answers to a common opposing argument. You write it before the round and read from it in rebuttal. Files are organized by the *argument you are answering*.
 
-Read first: `core/integrity.md`, `core/cutting-rules.md`, `core/research-protocol.md`.
+Read first: `core/integrity.md`, `core/cutting-rules.md`, `core/refutation-guide.md`, `core/research-guide.md`, `core/file-organization.md`, and `core/judge-adaptation.md`. End-to-end procedure: `playbooks/03-blocks-library.md`. Good and bad examples: `examples/good-vs-bad/rebuttals.md`.
 
 ## Inputs
 
@@ -49,6 +49,14 @@ Rules:
 8. Check with `python tools/lint_blocks.py file` (structure) and `python tools/lint_cards.py file` (cards cut too thin).
 
 A starter file is in `templates/block-skeleton.md`; a worked fictional example is `examples/example-cards.md`.
+
+## Organization rules
+
+- **One block per opposing argument.** Before making a block, search the existing files (`python tools/library.py search <folder> <keywords>`). If one exists, **merge** new cards into it; never create a duplicate.
+- **Keep the team's headings** if asked; add evidence under the existing heading.
+- **Prefer answers to their specific cards over takeouts.** Put a short, airtight takeout after the specific answers, if at all.
+- **Lay judges:** a short plain analytic right after each card, with no labels, arrows, or jargon (`core/judge-adaptation.md`; `python tools/lint_blocks.py file --lay`).
+- **New evidence** goes into the library file first, then into the speech-ready blocks file; the user does the final trimming.
 
 ## Good blocks
 

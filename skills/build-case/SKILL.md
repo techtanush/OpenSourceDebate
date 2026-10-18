@@ -15,6 +15,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `core/integrity.md`
 - `core/cutting-rules.md`
 
+## Playbook
+
+The detailed procedure and examples: `playbooks/01-case-from-scratch.md; examples/good-vs-bad/link-chains.md`
+
 ## Steps
 
 1. Collect resolution, side, format (`formats/`), wpm, and audience.

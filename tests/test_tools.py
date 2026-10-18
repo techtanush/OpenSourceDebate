@@ -409,3 +409,122 @@ class FlowChecksTests(unittest.TestCase):
         self.assertIn("Chain map:", out)
         self.assertIn("SOLVENCY", out)
         self.assertIn("numbers:", out)
+
+
+class LibraryAndLayTests(unittest.TestCase):
+    def test_library_index_and_search(self):
+        import io
+        import contextlib
+        import library
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            library.main(["index", os.path.join(ROOT, "examples")])
+            library.main(["search", os.path.join(ROOT, "examples"), "travel", "--text"])
+        out = buf.getvalue()
+        self.assertIn("Whitfield 25", out)
+        self.assertIn("A2: Retail will collapse", out)
+        self.assertIn("tag:", out)
+
+    def test_library_search_no_match(self):
+        import io
+        import contextlib
+        import library
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            library.main(["search", os.path.join(ROOT, "examples"), "zzzznotaterm"])
+        self.assertIn("no cards match", buf.getvalue())
+
+    def test_lay_flags_missing_plain_analytic(self):
+        import lint_blocks
+        events = [("block", "A2: X"), ("analytic", "Neg Argument: X."), ("analytic", "1. Overview."),
+                  ("card", "2. Answer"), ("card", "3. Another"), ("analytic", "4. Closing.")]
+        results, _ = lint_blocks.lint(events, lay=True)
+        self.assertTrue(any("no plain-English analytic" in r[2] for r in results))
+
+    def test_lay_flags_ai_labels_and_arrows(self):
+        import lint_blocks
+        events = [("block", "A2: X"), ("analytic", "Neg Argument: X."), ("card", "2. Answer"),
+                  ("analytic", "Lay version: this means cars are bad."),
+                  ("card", "3. Another"), ("analytic", "A -> B -> C"), ("analytic", "4. Closing.")]
+        results, _ = lint_blocks.lint(events, lay=True)
+        msgs = " ".join(r[2] for r in results)
+        self.assertIn("AI label", msgs)
+
+    def test_lay_clean_block_passes(self):
+        import lint_blocks
+        events = [("block", "A2: X"), ("analytic", "Neg Argument: X."), ("analytic", "1. Overview."),
+                  ("card", "2. Answer"), ("analytic", "This means the study found no extra traffic."),
+                  ("card", "3. Another"), ("analytic", "So the plan does not make things worse."),
+                  ("analytic", "4. Closing.")]
+        results, _ = lint_blocks.lint(events, lay=True)
+        self.assertEqual([r for r in results if r[0] in ("ERROR", "WARN")], [])
+
+
+class GoodVsBadAndReferencesTests(unittest.TestCase):
+    GVB = os.path.join(ROOT, "examples", "good-vs-bad")
+
+    def test_good_rebuttal_passes_everything(self):
+        import lint_blocks
+        path = os.path.join(self.GVB, "rebuttal-good.md")
+        results, n = lint_blocks.lint(lint_blocks.events_from_spec(path), lay=True)
+        self.assertEqual(n, 1)
+        self.assertEqual([r for r in results if r[0] in ("ERROR", "WARN")], [])
+        spec = build_docx.load_spec(path)
+        for item in spec["items"]:
+            if item["type"] == "card":
+                src = os.path.join(self.GVB, item["cite"]["source"])
+                with open(src, encoding="utf-8") as f:
+                    self.assertIsNone(verify_quotes.verify_card(item, f.read()))
+
+    def test_bad_rebuttal_fails(self):
+        import lint_blocks
+        path = os.path.join(self.GVB, "rebuttal-bad.md")
+        results, _ = lint_blocks.lint(lint_blocks.events_from_spec(path))
+        self.assertTrue(any(r[0] == "ERROR" for r in results))
+
+    def test_bad_case_fails(self):
+        import lint_case
+        path = os.path.join(self.GVB, "case-bad.md")
+        results, _ = lint_case.lint(lint_case.events_from_spec(path))
+        msgs = " ".join(r[2] for r in results)
+        self.assertIn("only 1 card", msgs)
+        self.assertIn("no chain map", msgs)
+        self.assertIn("analytics are", msgs)
+
+    def test_new_guides_exist(self):
+        for rel in ("core/research-guide.md", "core/refutation-guide.md", "core/judge-adaptation.md",
+                    "core/file-organization.md", "core/logic-flow.md", "core/argument-structure.md",
+                    "speeches/backlines/PROTOCOL.md", "playbooks/README.md",
+                    "playbooks/01-case-from-scratch.md", "playbooks/02-answer-an-opposing-case.md",
+                    "playbooks/03-blocks-library.md", "playbooks/04-frontlines.md",
+                    "playbooks/05-backlines-and-summary.md", "playbooks/06-use-my-files-as-context.md",
+                    "examples/good-vs-bad/link-chains.md", "examples/good-vs-bad/cards.md",
+                    "examples/good-vs-bad/rebuttals.md", "examples/good-vs-bad/analytics.md"):
+            self.assertTrue(os.path.exists(os.path.join(ROOT, rel)), rel)
+
+    def test_no_broken_repo_paths_in_docs(self):
+        import glob
+        import re
+        skip_dirs = ("/reference/", "/.git/", "/sources/", "/private-fixtures/")
+        generated = {"team.yaml", "library-index.md", "research-notes.md", "case.md", "case.docx",
+                     "blocks.md", "blocks.docx", "rebuttal.md", "rebuttal.docx", "spec.md", "file.md",
+                     "file.docx", "cards.md", "cards.docx", "out.docx", "out-DRAFT.docx",
+                     "case-DRAFT.docx", "their-case.docx", "their-case.pdf", "their-case.txt",
+                     "our-case.docx", "case-out.docx", "rebuttal-good.docx", "check.docx"}
+        pat = re.compile(r"`((?:core|speeches|playbooks|examples|templates|tools|docs|formats|skills|"
+                         r"schemas|tests)/[A-Za-z0-9_./-]+\.(?:md|py|docx|yaml|txt|pdf|json))`")
+        bad = []
+        for path in glob.glob(os.path.join(ROOT, "**", "*.md"), recursive=True):
+            if any(d in path for d in skip_dirs):
+                continue
+            with open(path, encoding="utf-8") as f:
+                text = f.read()
+            for ref in pat.findall(text):
+                base = os.path.basename(ref)
+                if base in generated or "<" in ref or "*" in ref:
+                    continue
+                if ref.startswith("sources/") or "/sources/" in ref:
+                    continue
+                if not os.path.exists(os.path.join(ROOT, ref)):
+                    bad.append("%s -> %s" % (os.path.relpath(path, ROOT), ref))
+        self.assertEqual(bad, [], "\n".join(bad[:20]))

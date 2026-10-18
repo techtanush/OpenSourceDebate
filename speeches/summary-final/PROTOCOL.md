@@ -2,7 +2,7 @@
 
 Used for: the last speeches of a round (summary, final rebuttal, final focus, or the last rebuttal in policy/LD). The job is to **collapse** to your best arguments, **weigh**, and give the judge clear reasons to vote.
 
-Read first: `core/integrity.md`.
+Read first: `core/integrity.md`, `core/logic-flow.md`, and `core/judge-adaptation.md`. End-to-end procedure: `playbooks/05-backlines-and-summary.md`.
 
 ## Inputs
 

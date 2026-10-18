@@ -12,6 +12,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `speeches/rebuttal/PROTOCOL.md`
 - `core/integrity.md`
 
+## Playbook
+
+The detailed procedure and examples: `playbooks/02-answer-an-opposing-case.md; core/refutation-guide.md; examples/good-vs-bad/rebuttals.md`
+
 ## Steps
 
 1. Extract the opponent's text (PDF or .docx) and map every argument and card.

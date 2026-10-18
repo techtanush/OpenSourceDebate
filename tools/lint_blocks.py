@@ -16,7 +16,13 @@ Block (Heading 3):
   WARN    no closing analytic after the last card (a link back to the resolution, a turn,
           or the weighing)
 
-See speeches/blocks/PROTOCOL.md for the block anatomy. Exit code 1 on any ERROR.
+With --lay (lay or parent judges): a short plain-English analytic must come right after
+each card, and analytics must not use labels that read like AI notes:
+  WARN    a card is not followed by an analytic
+  WARN    an analytic starts with a label like "Lay version" / "In simple terms", or uses arrows
+
+See speeches/blocks/PROTOCOL.md for the block anatomy and core/judge-adaptation.md for the
+lay rules. Exit code 1 on any ERROR.
 """
 import argparse
 import os
@@ -66,7 +72,10 @@ def events_from_docx(path):
     return out
 
 
-def lint(events):
+LABEL_RE = re.compile(r"^\s*(lay version|layman|in simple terms|simply put|plain english|eli5)\b", re.I)
+
+
+def lint(events, lay=False):
     """Return list of (level, block_title, message)."""
     results = []
     blocks = []
@@ -96,6 +105,14 @@ def lint(events):
                   [1 for k, t in items if k == "analytic" and re.match(r"^\s*\d+\.", t)]
         if len(answers) < 2:
             results.append(("WARN", title, "fewer than two answers"))
+        if lay:
+            for n, (k, t) in enumerate(items):
+                if k == "card" and not (n + 1 < len(items) and items[n + 1][0] == "analytic"):
+                    results.append(("WARN", title,
+                                    "lay: no plain-English analytic right after the card %r" % t[:50]))
+                if k == "analytic" and (LABEL_RE.match(t) or "->" in t or "\u2192" in t):
+                    results.append(("WARN", title,
+                                    "lay: analytic reads like an AI label or uses arrows: %r" % t[:50]))
         last_card = max((n for n, (k, _) in enumerate(items) if k == "card"), default=-1)
         if last_card >= 0 and not any(k == "analytic" for k, _ in items[last_card + 1:]):
             results.append(("WARN", title,
@@ -107,10 +124,12 @@ def lint(events):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("file", help="spec (.md/.json) or .docx")
+    ap.add_argument("--lay", action="store_true",
+                    help="lay-judge checks: a plain analytic after each card, no AI-style labels")
     args = ap.parse_args(argv)
     events = events_from_docx(args.file) if args.file.lower().endswith(".docx") \
         else events_from_spec(args.file)
-    results, n = lint(events)
+    results, n = lint(events, lay=args.lay)
     for level, title, msg in results:
         print("%-5s %s\n      %s" % (level, title[:80], msg))
     errors = sum(1 for r in results if r[0] == "ERROR")

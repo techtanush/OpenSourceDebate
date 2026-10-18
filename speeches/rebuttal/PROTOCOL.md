@@ -2,7 +2,7 @@
 
 Used for: answering the opponent's case and defending your own after the constructives. Works for first and second rebuttals; adjust the time budget from `formats/`.
 
-Read first: `core/integrity.md`, `core/cutting-rules.md`.
+Read first: `core/integrity.md`, `core/refutation-guide.md` (how to find and rank answers), `core/judge-adaptation.md` (lay vs. tech and timing), `core/cutting-rules.md`, and `core/research-guide.md` section 6 (researching answers). The full procedure is `playbooks/02-answer-an-opposing-case.md`; good and bad examples are in `examples/good-vs-bad/rebuttals.md`.
 
 ## Inputs to collect
 
@@ -10,6 +10,18 @@ Read first: `core/integrity.md`, `core/cutting-rules.md`.
 - Your own case (what you must still defend).
 - The time limit and wpm (`formats/`).
 - What the opponent actually said in the round, if you have a flow. Never answer an argument they didn't make.
+
+## Answer their specific cards, not the topic
+
+Get the actual text of each card they read and answer **that card**. Read the paragraphs before and after their highlighting; the qualifiers, scope limits, and concessions there are your best material. Prefer answers to specific cards over case-wide takeouts, especially with lay judges, who hear a broad takeout as a reach. Use `python tools/inspect_docx.py their-case.docx --cards` (or `pdftotext` for a PDF) and the hole checklist in `core/refutation-guide.md`.
+
+## Pull from the context you have
+
+Before writing, use what is already in the files: your own case (so you don't contradict it and can link turns to it), your block library (`python tools/library.py search <folder> <terms>`), and what was actually said in the round. Extend only cards that were actually read; everything else is a full card. See `playbooks/06-use-my-files-as-context.md`.
+
+## Time by judge type
+
+Lay judges: about 2:00 per contention in the first rebuttal and about 1:00 per contention in the second (configurable in `team.yaml`). Give fewer, stronger answers and a plain sentence after each card. Technical judges: more layers, explicit weighing. See `core/judge-adaptation.md`.
 
 ## Step 1: Map their case
 

@@ -12,6 +12,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `core/integrity.md`
 - `core/cite-format.md`
 
+## Playbook
+
+The detailed procedure and examples: `examples/good-vs-bad/cards.md`
+
 ## Steps
 
 1. Run `python tools/verify_quotes.py spec.md --strict` and `python tools/lint_cites.py spec.md`.

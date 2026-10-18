@@ -2,7 +2,7 @@
 
 **Frontlines** = prepared defense of **your own** arguments against the responses the opponent is likely to make. (Prepared answers to *their* arguments are "blocks" or "A2s," see `speeches/blocks/`.)
 
-Read first: `core/integrity.md`, `core/cutting-rules.md`.
+Read first: `core/integrity.md`, `core/cutting-rules.md`, `core/refutation-guide.md`, `core/file-organization.md`, and `core/judge-adaptation.md`. End-to-end procedure: `playbooks/04-frontlines.md`. Start by reading our own case (`python tools/inspect_docx.py our-case.docx --cards`) so you know what was read.
 
 ## Inputs to collect
 
@@ -40,6 +40,20 @@ Card or Analytic:    new evidence, or a short extension of a constructive card
 - **Prepare for turns.** For each contention, ask: could the opponent turn this? If so, write the answer before the round.
 - **Keep answers short.** A frontline answer should be 20-40 seconds to read aloud.
 - **Disclose gaps.** If you have no good answer to a response, say so in the notes instead of papering over it.
+
+## Standard structure (contention, our argument, their response, our defense)
+
+```
+Hat   : <Contention>
+  Tag + cite + card : our argument and the card we read (so the file shows what the judge heard)
+  Block : AT: <their response to this argument>
+    <Opponent> Argument: <their response, stated fairly>
+    1. overview answer
+    2..N tagged answers, each with its card (or an Extend analytic for cards already read)
+    closing line: why it still stands if dropped
+```
+
+Lay judges: a short plain analytic after each new card (`core/judge-adaptation.md`).
 
 ## File structure
 

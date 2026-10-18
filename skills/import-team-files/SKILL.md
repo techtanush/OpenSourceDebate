@@ -12,6 +12,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `core/card-anatomy.md`
 - `core/cite-format.md`
 
+## Playbook
+
+The detailed procedure and examples: `playbooks/06-use-my-files-as-context.md (use tools/library.py index and search)`
+
 ## Steps
 
 1. Run `python tools/inspect_docx.py <file>.docx` and `--cards` on a few representative files.

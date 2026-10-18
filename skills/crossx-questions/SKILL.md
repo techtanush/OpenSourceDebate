@@ -12,6 +12,10 @@ First read `AGENTS.md` and `core/integrity.md` from the repo root. Never fabrica
 - `speeches/crossx/PROTOCOL.md`
 - `core/integrity.md`
 
+## Playbook
+
+The detailed procedure and examples: `speeches/crossx/PROTOCOL.md; core/refutation-guide.md (hole checklist)`
+
 ## Steps
 
 1. Read their whole case and list arguments, cards, and cites.
