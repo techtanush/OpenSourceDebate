@@ -8,7 +8,7 @@ A toolkit that teaches an AI coding agent (**Claude Code**, **Codex**, or simila
 
 - **No AI API and no key.** Your own agent does the searching and thinking.
 - The repo supplies what the agent needs to do it *right*: protocols, file formats, integrity rules, templates, worked examples, and small Python tools that check the agent's work.
-- It is topic-agnostic. The examples are fictional (the only real material is in `reference/`, see below).
+- It is topic-agnostic. The examples are fictional.
 
 ## Who reads what
 
@@ -67,18 +67,13 @@ Using an agent: open Claude Code (or Codex) **in this folder** and ask for a tas
 | `core/` | Rules every task follows: integrity, card anatomy, cutting rules, cite format, source evaluation, **research guide**, **argument structure (link chains)**, **logic flow**, **refutation guide**, **judge adaptation**, **file organization**, glossary |
 | `playbooks/` | **End-to-end procedures**: case from scratch, answer an opposing case, blocks library, frontlines, backlines and summary, use the user's files as context |
 | `speeches/` | One protocol per kind of file: `case/`, `rebuttal/`, `frontlines/`, `blocks/`, `backlines/`, `crossx/`, `summary-final/`, `prep/` |
-| `formats/` | Speech order and times for Policy, LD, PF, plus a template for your league |
+| `formats/` | Public Forum speech order and times |
 | `skills/` | Claude Code skills (thin wrappers that point to the protocols above) |
 | `tools/` | Python tools (no installs): `build_docx`, `inspect_docx`, `library` (index/search the user's files), `verify_quotes`, `lint_cites`, `lint_cards`, `lint_blocks`, `lint_case`, `tag_story`, `speech_timer`; see `tools/README.md` |
 | `templates/` | Blank starter files, including `block-skeleton.md` |
 | `examples/` | A fictional worked example (source, card spec, built `.docx`), a fictional case chain, and `good-vs-bad/` with annotated bad and good link chains, cards, rebuttals, and analytics |
 | `docs/` | `what-good-looks-like.md`, `agent-smoke-test.md`, `fresh-session-test-prompt.md` |
-| `reference/` | **Private-repo only:** real example blocks and two real opposing files, for studying structure |
 | `tests/` | Unit tests for the tools |
-
-## A note on `reference/`
-
-`reference/` holds real files from a debate team and opposing teams. It is there so agents can study how good documents are built. **Do not make the repo public with it in.** Delete it (and replace the quoted snippets in `docs/what-good-looks-like.md`) first. See `reference/README.md`.
 
 ## A note on formatting
 

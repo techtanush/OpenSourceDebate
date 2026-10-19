@@ -55,4 +55,4 @@ python tools/speech_timer.py case.docx --wpm <rate> --limit <seconds>
 - Contentions that contradict each other.
 - Skipping the flow test.
 
-**Reference:** `examples/example-case.md` (fictional contention), `docs/real-1ac-chain-walkthrough.md` (real 1AC mapped to the chain; private reference).
+**Reference:** `examples/example-case.md` (fictional contention).

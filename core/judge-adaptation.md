@@ -15,7 +15,7 @@ What they respond to: a clear story, simple reasons, specific evidence they can 
    - Analytic: *"So the cars did not just move next door. The streets around the area actually got faster."*
 2. **No labels that sound like notes to the reader.** Do not write "LAY VERSION:", "In simple terms:", "Plain English:", arrows (`A -> B -> C`), or bracketed meta-text. The file should read like a normal team file. The explanation is just a plain sentence.
 3. **No unexplained jargon.** Say "paid for it" not "internalize the cost"; "the cars move to nearby streets" not "displacement"; spell out acronyms once.
-4. **Answer their specific cards, not the whole case.** "Their study is about one pilot street" lands better than "their entire case fails because of X." A broad takeout can sound like a reach; use it only if it is airtight and short.
+4. **Answer the specific claim, not the whole case.** "That study is about one pilot street" lands better than "their entire case fails because of X." A broad takeout can sound like a reach; use it only if it is airtight and short. In the file, name the block for the claim and keep card names out of the titles and analytics.
 5. **Fewer, stronger answers.** Two or three clean answers beat six. Lead with the one a parent would nod at.
 6. **Keep numbers few and round.** One or two numbers per answer, said slowly. "About a third fewer injuries" over "35.8 percent."
 7. **Tell a story with a person in it** when you can: who is affected and how.

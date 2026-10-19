@@ -9,7 +9,7 @@ Analytics are the short sentences you write yourself between cards. Evidence doe
 | Job | Example | Where |
 |-----|---------|-------|
 | State the opposing argument fairly | `Neg Argument: Downtown stores lose sales when cars are banned.` | Top of a block |
-| Overview answer | `1. Their own card says it was four streets with no bus changes.` | Start of the answers |
+| Overview answer | `1. That pilot was four streets with no bus changes.` | Start of the answers |
 | Connect or explain a card (lay) | `So the cars did not move next door; the streets around the area got faster.` | Right after a card |
 | Solvency sentence (Aff case) | `Solvency: our plan requires the same phase-in and permits, so it removes the cars that cause the injuries, and Fairhaven shows injuries fall when it does.` | End of a contention |
 | Closing link or turn | `4. So their harm is what happens when a city closes streets and walks away, which our plan does not do.` | End of a block |
@@ -86,7 +86,7 @@ Card: the same.
 ```
 AT: Retail collapse
 Neg Argument: Downtown stores lose sales when cars are banned.
-1. Their own card says it was four streets with no bus changes, and sales came back.
+1. That pilot was four streets with no bus changes, and sales came back.
 2. [their card: four blocks, no bus changes, recovered within three percent]
    So the drop they read was four streets with no buses added, and by the end of summer it was nearly gone.
 3. [twelve-city study: flat or up in eleven]

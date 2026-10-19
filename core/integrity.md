@@ -14,7 +14,9 @@ Read this before cutting, quoting, or summarizing any evidence. These rules appl
 4. **Save the source text.** Put the full article text in a file (e.g. `sources/author-yy.txt`) and point the card's `source:` at it, so `tools/verify_quotes.py` can check the card.
 5. **Record the date accessed (DOA)** for every online source, in the format the team uses.
 6. **Do not change what the author means.** Highlighting that flips a claim ("not", "may", "some") is cutting out of context. Keep qualifiers that change the meaning.
-7. **Disclose weaknesses.** If a card is from a biased source, an old source, a summary, or only partly supports the tag, say so in a short note to the user.
+7. **Cites come from the page, never from memory.** Take the author, credentials, date, title, publication, and URL from the fetched page (or its metadata). If the page does not show an author or date, say so in the cite or the report; do not guess. A real URL with an invented author is still fabrication.
+8. **No notes to yourself inside the file.** Do not leave cutter initials, tool or assistant names, "re-cut" notes, TODOs, or "find a card" reminders in a finished card or block. Put open problems in your report to the user instead.
+9. **Disclose weaknesses.** If a card is from a biased source, an old source, a summary, or only partly supports the tag, say so in a short note to the user.
 
 ## Statuses
 

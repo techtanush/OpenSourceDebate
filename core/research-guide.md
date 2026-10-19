@@ -98,7 +98,7 @@ Before the slot-by-slot work, build a quick map of the **kinds of evidence a res
 
 | Look for | Why you need it | Example question |
 |----------|-----------------|------------------|
-| **Definitions** of the key terms from an authority (statute, agency, dictionary of the field) | Frames the debate; prevents the opponent from redefining | "How does the law or agency define a hyperscale facility / a downtown core?" |
+| **Definitions** of the key terms from an authority (statute, agency, dictionary of the field) | Frames the debate; prevents the opponent from redefining | "How does the law or agency define a pedestrian zone / a downtown core?" |
 | **The status quo**: existing laws, programs, and trends | Uniqueness for both sides; shows what the resolution changes | "What already exists? What is already being done or planned?" |
 | **Who is affected** and how many | Scale of both the benefit and the cost | "How many people, businesses, or places does this touch?" |
 | **Harms now (quantitative)** | The Aff's problem; the Neg's baseline | "What does the problem cost in deaths, dollars, or damage per year?" |

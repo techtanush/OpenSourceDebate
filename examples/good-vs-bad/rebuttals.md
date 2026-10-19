@@ -42,8 +42,8 @@ Tools: `python tools/lint_blocks.py examples/good-vs-bad/rebuttal-bad.md` report
 ```
 AT: Retail collapse
 Neg Argument: Downtown stores lost 18 percent of their sales when Ashford closed streets to cars, so a ban will wreck local business.
-1. Their own card says it was four streets with no bus changes, and sales came back by the end of the summer.
-2. Their own card: the pilot covered four blocks, changed no bus service, and sales recovered to within three percent      [card: Reyes 24, their source]
+1. That pilot was four streets with no bus changes, and sales came back by the end of the summer.
+2. The pilot covered four blocks, changed no bus service, and sales recovered to within three percent      [card: Reyes 24, their source]
    So the drop they read was four streets with no buses added, and by the end of summer it was nearly gone.
 3. A four-year study of twelve cities found sales flat to slightly up in eleven of them                                   [card: Whitfield 25]
    That is far more cities, over four years, than one short pilot.

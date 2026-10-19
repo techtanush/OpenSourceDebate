@@ -8,9 +8,9 @@
 
 > Neg Argument: Downtown stores lost 18 percent of their sales when Ashford closed streets to cars, so a ban will wreck local business.
 
-> 1. Their own card says it was four streets with no bus changes, and sales came back by the end of the summer.
+> 1. That pilot was four streets with no bus changes, and sales came back by the end of the summer.
 
-#### 2. Their own card: the pilot covered four blocks, changed no bus service, and sales recovered to within three percent
+#### 2. The pilot covered four blocks, changed no bus service, and sales recovered to within three percent
 
 cite: Reyes 24
 author: Tom Reyes

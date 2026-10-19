@@ -19,7 +19,7 @@ The detailed procedure and examples: `playbooks/03-blocks-library.md; core/file-
 
 ## Steps
 
-1. State the opposing argument fairly, with the evidence they would read.
+1. Name the block for the claim (never an author or card), open it with "Pro Argument:" / "Con Argument:" and a fair statement of the claim, and merge into an existing block for that claim if one exists.
 2. Write answers: takeouts, turns, mitigation, source indicts. Research and verify cards.
 3. Order strongest first; add "if they say X, say Y" follow-ups; time it.
 4. Deliver the .docx and the caveats list.

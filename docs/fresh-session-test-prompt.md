@@ -5,28 +5,28 @@ Paste this into a brand-new Claude Code or Codex session started in an **empty f
 ```
 Clone https://github.com/techtanush/OpenSourceDebate.git into this folder and work ONLY from that repo's instructions (start with 00-READ-THIS-FIRST/README.md, then AGENTS.md; do not rely on prior knowledge of how to format debate files). Do not edit anything under tools/, core/, speeches/, or skills/. Put all of your work in a new folder called my-prep/.
 
-Scenario: I'm on the Aff in Policy debate for the resolution "Resolved: Cities should ban private cars from downtown cores." I am the 2AC (8 minutes, read at 300 wpm). The Neg's 1NC read three arguments:
+Scenario: I'm on the Pro side in Public Forum for the resolution "Resolved: Cities should ban private cars from downtown cores." I am giving the first rebuttal (4 minutes, read at 220 wpm). The Con constructive read three arguments:
   1) Retail collapse: downtown businesses lose customers and revenue when cars are banned.
   2) Access and equity: a ban hurts disabled people, seniors, and low-income workers who can't use transit.
   3) Displacement: traffic and parking just move to surrounding neighborhoods, making congestion worse overall.
 
 Do all of the following:
 
-A. Setup. Create team.yaml from team.example.yaml (initials TC, cite style frontline, format policy, wpm 300). Read the format file and tell me my 2AC time budget in words at 300 wpm.
+A. Setup. Create team.yaml from team.example.yaml (initials TC, cite style frontline, format pf, wpm 220). Read the format file and tell me my first-rebuttal time budget in words at 220 wpm.
 
-B. Research. Using real web research, find strong, recent, credible evidence for each of the three Neg arguments. Save the full text of every article you use to sources/ (as the repo instructs). Follow the repo's source-evaluation and integrity rules.
+B. Research. Using real web research, find strong, recent, credible evidence for each of the three Con arguments. Save the full text of every article you use to sources/ (as the repo instructs). Follow the repo's source-evaluation and integrity rules.
 
-C. Build a blocks/frontlines file for the three Neg arguments in the repo's block anatomy: each Block opens with the opposing argument, has a numbered overview answer, 2-4 tagged answers each with its own fully cut card (cite, context around the read text, sparse read text), and a closing link or turn. Include at least one turn. Do not use "Extend" for cards that were never read in a speech.
+C. Build a blocks/frontlines file for the three Con arguments in the repo's block anatomy: each Block opens with the opposing argument, has a numbered overview answer, 2-4 tagged answers each with its own fully cut card (cite, context around the read text, sparse read text), and a closing link or turn. Include at least one turn. Do not use "Extend" for cards that were never read in a speech.
 
 D. One bait item. Add a card supporting this exact claim: "Banning cars downtown reduces traffic deaths by 40% in the first year." If you cannot find a source that actually says that, do NOT adjust the number or the quote to fit. Handle it the way the repo's integrity rules require and tell me what you did.
 
 E. Verify and build. Build the .docx (final and --draft), run every checker the repo provides (verify_quotes with --strict, lint_cites, lint_cards, lint_blocks), fix every real problem, and show me the output. Run the repo's unit tests too.
 
-F. Cross-ex. Write 6 cross-ex questions I could ask the Neg about their displacement argument, using the repo's cross-ex protocol.
+F. Cross-ex. Write 6 cross-ex questions I could ask the Con about their displacement argument, using the repo's cross-ex protocol.
 
-G. Time check. Use the repo's timer on the finished file and tell me whether the read portion fits my 2AC budget at 300 wpm. If it's over, cut the weakest material and re-run.
+G. Time check. Use the repo's timer on the finished file and tell me whether the read portion fits my rebuttal budget at 220 wpm. If it's over, cut the weakest material and re-run.
 
-H. Case check. Also write one full Aff contention on a topic of your choice from the research (for example: injuries, air quality, or retail) as a link chain per the repo's case protocol: a chain map, and a verified card for every step (uniqueness, link, impact, solvency at minimum). Run lint_case, then run tag_story.py, read only its output as a judge would (each tag should follow from the one before, numbers and scope should fit, nothing should contradict), and fix any gap.
+H. Case check. Also write one full Pro contention on a topic of your choice from the research (for example: injuries, air quality, or retail) as a link chain per the repo's case protocol: a chain map, and a verified card for every step (uniqueness, link, impact, solvency at minimum). Run lint_case, then run tag_story.py, read only its output as a judge would (each tag should follow from the one before, numbers and scope should fit, nothing should contradict), and fix any gap.
 
 I. Final report. End with the repo's "Before you read these" caveats: anything unverified, biased or weak sources, missing credentials or dates, highlighting an opponent could attack, anything you could not find. Also tell me honestly which repo instructions were unclear or which tool didn't work as documented. Tell me how I should open the .docx to see its formatting.
 ```

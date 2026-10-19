@@ -1,8 +1,6 @@
 # What a good block file looks like
 
-> Note for the maintainer: the walkthrough below quotes short snippets from the real files in `reference/`. Before making this repo public, replace them with fictional snippets (like `examples/`) or delete this note's source material along with `reference/`.
-
-Read this before building a block or frontline file. It is based on real working files in `reference/` and on a test where an agent following an earlier version of the toolkit produced files that were not good enough.
+Read this before building a block or frontline file. It is based on how strong team files are built and on a test where an agent following an earlier version of the toolkit produced files that were not good enough.
 
 ## The problem this fixes
 
@@ -15,27 +13,21 @@ A test run produced two files that followed the old instructions and still came 
 | Several cards cut as a single sentence (entirely highlighted, no text around it) | The judge cannot see what the author said before and after. |
 | Block-level structure missing: no "Aff Argument:" line, no numbered answers, no closing link or turn | The speaker cannot find or reorder answers in the round. |
 
-`python tools/lint_blocks.py` and `python tools/lint_cards.py` now catch these. On the agent's files they reported 6 and 7 block errors and 2 thin cards; on the real example blocks they report no errors.
+`python tools/lint_blocks.py` and `python tools/lint_cards.py` now catch these. On the agent's files they reported 6 and 7 block errors and 2 thin cards; on the fictional example blocks they report no errors.
 
 ## The shape of a good block
 
-From `reference/example-blocks/example-blocks-excerpt.docx` (about 6,000 words from a real team blocks file; open it in an editor that supports Verbatim-style formatting):
+This is the shape (fictional topic):
 
 ```
-AT: Data Centers Raise Household Electricity Bills                  <- Block (Heading 3)
-Aff Argument: Data centers drive up utility costs, so families pay more.   <- states their argument
-1. Empirically, more demand has LOWERED prices. More electricity on the same wires
-   spreads fixed costs over more customers.                         <- overview answer (Analytic)
-2. Berkeley Lab: load growth helped DEPRESS electricity prices...   <- Tag (specific argument sentence)
-   Howland 25 [Ethan Howland, Senior Reporter, Utility Dive, ... EXCERPT https://... ] DOA: ...
-   Generally, load growth helped depress electricity prices ...      <- card: cite, then body
-3. Data centers aren't to blame — one study links them to LOWER rates...   <- Tag
-   Huddleston 26 [...]                                              <- cite
-   <context>... it's far from clear that data centers are to blame ...     <- card
-4. Hyperscalers have committed to pay their own way ...              <- Tag + card
-5. States are locking it in — large-load tariffs ...                 <- Tag + card
-6. A moratorium doesn't lower any bill. Existing data centers and the grid upgrades
-   already built stay on the rate base...                           <- closing analytic: link/turn
+AT: Downtown Car Ban Hurts Retail                                  <- Block (Heading 3)
+Neg Argument: A ban drives shoppers away, so downtown stores lose sales.   <- states their argument
+1. Sales held steady in most cities after a ban.                    <- overview answer (Analytic)
+2. <Tag: a full argument sentence with its specifics>               <- Tag
+   Author 25 [credentials, date, title, publication. URL] DOA: ...  <- cite
+   <context> ==key words read== <context>                           <- card
+3. <next tagged answer with its own card>
+4. <closing analytic that links back to the resolution or turns it>
 ```
 
 What to copy:
@@ -50,7 +42,7 @@ What to copy:
 
 ## What a good contention looks like (cases and DAs)
 
-A second test run built a 1AC with three contentions. It had about **one or two cards per contention** and 21 analytic paragraphs, several over 100 words. Each contention argued a direction ("fewer injuries," "cleaner air," "commerce can adapt") from a single study, and explained its limits at length. What was missing:
+A second test run built a constructive with three contentions. It had about **one or two cards per contention** and 21 analytic paragraphs, several over 100 words. Each contention argued a direction ("fewer injuries," "cleaner air," "commerce can adapt") from a single study, and explained its limits at length. What was missing:
 
 | Missing | Why it matters |
 |---------|---------------|
@@ -61,9 +53,7 @@ A second test run built a 1AC with three contentions. It had about **one or two 
 | **Cards instead of essays**: long analytics doing the evidence's job | Analytics connect cards; they are not evidence. Cards first. |
 | **Aff solvency**: nothing showing the *resolution itself* would cause the impact to fall | An Aff that proves a big problem but not that its resolution fixes it has not made the case |
 
-For comparison, the real opposing 1AC in `reference/` (mapped step by step in `docs/real-1ac-chain-walkthrough.md`) carries eight and seven cards in its two contentions, reads only about 5-15% of each card, and has no analytic paragraphs between cards. Those contentions carry roughly six to eight cards each: the problem now, how fast it is growing, the key scale number, the mechanism, the consequence, the terminal impact, and solvency. `python tools/lint_case.py` on the agent's case reported 12 errors and 11 warnings, including that analytics were 72-89% of what each contention would have spoken (404 analytic words against 49 read from cards in the first one) and that no contention had a solvency statement; `python tools/lint_case.py examples/example-case.md` reports none.
-
-The target shape (see `examples/example-case.md`, a fictional contention):
+A strong contention carries roughly six to eight cards: the problem now, how fast it is growing, the key scale number, the mechanism, the consequence, the terminal impact, and solvency, with only the key words of each card read. The target shape (see `examples/example-case.md`, a fictional contention):
 
 ```
 Contention 1: Downtown car traffic is injuring and killing people
@@ -92,7 +82,3 @@ python tools/lint_cards.py file.md               # no card is a lone highlighted
 python tools/lint_blocks.py file.md              # blocks have real cards and the right shape
 python tools/lint_case.py file.md                # contentions are chains: chain map, a card for every step
 ```
-
-## Reference material
-
-See `reference/README.md`. It holds an excerpt of real blocks and two real opposing files for studying structure and style. Study the structure; do not copy their evidence into another project.

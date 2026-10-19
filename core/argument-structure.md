@@ -18,7 +18,7 @@ For a disadvantage, the same parts apply from the other side: UQ (things are fin
 ## The standard
 
 1. **One card per step. Never one card for the whole argument.** If a step has no card, it is an assertion. Write "UQ," "Link," and so on next to each card in your outline and look for gaps.
-2. **A contention needs a chain of cards.** In the real constructive files in `reference/`, a typical contention carries about six to eight cards: the problem now, the trend, the key scale number, the mechanism, the consequence, the terminal impact, and solvency. Two cards per contention is a sketch, not a case.
+2. **A contention needs a chain of cards.** In strong constructive files, a typical contention carries about six to eight cards: the problem now, the trend, the key scale number, the mechanism, the consequence, the terminal impact, and solvency. Two cards per contention is a sketch, not a case.
 3. **The link must be proven, not described.** The most common weakness is a link written as analytic prose ("removing cars obviously reduces crashes"). Find the card that shows the mechanism. An analogy study can be used if you say what it does and does not show, but you still need the card.
 4. **The impact needs size and a timeframe.** "Fewer injuries" is a direction. "About 1.2 million road deaths a year, and X in this city" is an impact. Scale is what makes a chain weighable.
 5. **Every card carries a step label in your outline** (and the chain map, below), so the judge, your partner, and the lint tool can see what each card is for.
@@ -65,7 +65,7 @@ Before delivering a case or a DA, run this test:
 
 ## Impact framing vs. weighing
 
-- In a **constructive** (1AC, 1NC), frame each impact: state its size, who is affected, and its timeframe, and note whether it is reversible. This is a few sentences of analytic around the impact card.
+- In a **constructive** (Pro or Con), frame each impact: state its size, who is affected, and its timeframe, and note whether it is reversible. This is a few sentences of analytic around the impact card.
 - **Comparing** your impact to the opponent's (probability, magnitude, timeframe, reversibility, and which one the judge should prefer) is done in the **rebuttals**, when you know what the other side argued. See `speeches/rebuttal/PROTOCOL.md` and `speeches/summary-final/PROTOCOL.md`.
 - Do not skip impact framing in a constructive, and do not spend constructive time on a head-to-head comparison against arguments that have not been made yet.
 

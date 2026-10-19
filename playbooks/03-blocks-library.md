@@ -6,7 +6,7 @@
 
 ## Steps
 
-1. **List the arguments to answer.** Sources: the topic's common arguments, the opposing cases you have seen (`reference/`, the user's files), and the weaknesses you found in your own case. Group by topic area (Hats).
+1. **List the arguments to answer.** Sources: the topic's common arguments, the opposing cases you have seen (the user's files), and the weaknesses you found in your own case. Group by topic area (Hats).
 2. **Check what exists.** `python tools/library.py index <folder> -o library-index.md` and `python tools/library.py search <folder> <keywords>`. If a block exists for the argument, **add to it**; do not create a duplicate.
 3. **For each argument:**
    1. Write the fair one-sentence statement ("Neg Argument: ...").

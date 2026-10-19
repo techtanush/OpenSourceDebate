@@ -49,7 +49,7 @@ Analytic        Solvency: how the resolution itself causes this impact to fall, 
 
 ### Minimums
 
-- **At least 4 cards per contention**, and one for every step named in the chain map. About 6-8 is typical for a strong contention in the real files in `reference/`.
+- **At least 4 cards per contention**, and one for every step named in the chain map. About 6-8 is typical for a strong contention.
 - **Every step in the chain map has a card.** A step with no card is an assertion; cut the step or find the card.
 - **The link is a card.** Do not write it as analytic prose.
 - **The impact has a number and a timeframe.**

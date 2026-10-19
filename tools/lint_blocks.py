@@ -10,8 +10,10 @@ Block (Heading 3):
 
   ERROR   no cut cards at all (analytics that only mention a card elsewhere don't count)
   ERROR   a Tag with no cite/body after it (an answer with no card)
-  ERROR   no opening statement of the opposing argument ("Aff Argument: ...", "Neg
+  ERROR   no opening statement of the opposing argument ("Con Argument: ...", "Pro
           Argument: ...", "Argument: ...") before the answers
+  WARN    block title names a card (author + year, or a parenthetical) instead of the claim
+  WARN    an analytic points at the opponent's card ("their own X card says...", "Read: X")
   WARN    fewer than two answers (numbered analytics plus tagged cards)
   WARN    no closing analytic after the last card (a link back to the resolution, a turn,
           or the weighing)
@@ -72,6 +74,8 @@ def events_from_docx(path):
     return out
 
 
+CARD_TITLE_RE = re.compile(r"^\s*AT:.*(\b[A-Z][A-Za-z'\u2019\-]+(?:\s+(?:and|&)\s+[A-Z][A-Za-z'\u2019\-]+)?\s+['\u2019]?\d{2}\b|\([^)]*\))")
+POINTS_AT_CARD_RE = re.compile(r"\b(?i:their|the other side's) own\b[\w&.\u2019' -]{0,25}?\b(?i:card|evidence)\b|\b(?i:their) [A-Z][\w&.\u2019'-]+ (?i:card)\b|^\s*(?i:read:)\s|^\s*(?i:vs\.)\s")
 LABEL_RE = re.compile(r"^\s*(lay version|layman|in simple terms|simply put|plain english|eli5)\b", re.I)
 
 
@@ -100,9 +104,17 @@ def lint(events, lay=False):
         if not any(ARG_STATEMENT.match(t) for t in opening):
             results.append(("ERROR", title,
                             "no opening statement of the opposing argument "
-                            "(e.g. 'Aff Argument: ...') before the answers"))
+                            "(e.g. 'Con Argument: ...') before the answers"))
         answers = [1 for k, t in items if k in ("card", "tag")] + \
                   [1 for k, t in items if k == "analytic" and re.match(r"^\s*\d+\.", t)]
+        if CARD_TITLE_RE.match(title):
+            results.append(("WARN", title,
+                            "title names a card; name the block for the claim it answers"))
+        for k, t in items:
+            if k == "analytic" and POINTS_AT_CARD_RE.search(t):
+                results.append(("WARN", title,
+                                "analytic points at their card instead of the claim: %r" % t[:60]))
+                break
         if len(answers) < 2:
             results.append(("WARN", title, "fewer than two answers"))
         if lay:

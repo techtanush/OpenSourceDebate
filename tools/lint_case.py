@@ -2,8 +2,8 @@
 """Check that each contention (or DA) in a case is a real link chain of cards.
 
 Usage:
-    python tools/lint_case.py case.md            # Aff case (solvency required)
-    python tools/lint_case.py case.docx --neg    # Neg case / DAs (solvency not required)
+    python tools/lint_case.py case.md            # Pro case (solvency required)
+    python tools/lint_case.py case.docx --con    # Con case / turns (solvency not required)
 
 A "contention" is a Hat (Heading 2) or Block (Heading 3) whose title starts with
 "Contention", "C1"/"C2"..., "Advantage", "Adv", "DA", or "Disad". Checks per contention:
@@ -11,9 +11,9 @@ A "contention" is a Hat (Heading 2) or Block (Heading 3) whose title starts with
   ERROR   fewer than MIN_CARDS cards
   ERROR   no chain map: an Analytic starting with "Chain:" before the first card, naming
           each step, e.g.  Chain: UQ (Reyes 25) -> LINK (Whitfield 24) -> IMPACT (WHO 24)
-  ERROR   chain map is missing UQ, LINK, or IMPACT (and SOLVENCY for an Aff case)
+  ERROR   chain map is missing UQ, LINK, or IMPACT (and SOLVENCY for a Pro case)
   ERROR   fewer cards than steps named in the chain map (a step with no card)
-  ERROR   (Aff) no "Solvency:" analytic: a short statement of how the resolution itself
+  ERROR   (Pro) no "Solvency:" analytic: a short statement of how the resolution itself
           causes the impact to be reduced, tied to the SOLVENCY card
   ERROR   analytics outweigh evidence: analytic words are more than MAX_ANALYTIC_SHARE of
           (analytic words + words actually read from cards)
@@ -217,12 +217,12 @@ def lint(events, aff=True):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("file", help="spec (.md/.json) or .docx")
-    ap.add_argument("--neg", action="store_true",
-                    help="Neg case / DAs: do not require a SOLVENCY step")
+    ap.add_argument("--con","--neg", action="store_true",
+                    help="Con case / turns: do not require a SOLVENCY step")
     args = ap.parse_args(argv)
     events = events_from_docx(args.file) if args.file.lower().endswith(".docx") \
         else events_from_spec(args.file)
-    results, n = lint(events, aff=not args.neg)
+    results, n = lint(events, aff=not args.con)
     if n == 0:
         print("no contentions found (headings starting with Contention / C1 / Advantage / DA)")
         return 1

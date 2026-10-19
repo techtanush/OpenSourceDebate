@@ -1,6 +1,6 @@
 # Examples, in the order to study them
 
-Work through these in order. Steps 1-4 are the fictional example (safe to share). Steps 5-6 are real files and are in the private-only `reference/` folder.
+Work through these in order. Everything here is fictional and safe to share.
 
 ## 1. The source
 
@@ -78,31 +78,10 @@ python tools/lint_case.py examples/example-case.md                          # pa
 python tools/lint_case.py examples/good-vs-bad/case-bad.md                  # fails
 ```
 
-## 4c. A real 1AC mapped to the chain standard (private reference)
-
-`reference/opponent-files/opponent-1AC-example.docx` is a real opposing 1AC. `docs/real-1ac-chain-walkthrough.md` maps each tag and card to UQ, TREND, LINK, IL, IMPACT, and SOLVENCY, with card counts and how much of each card is read. Run `python tools/inspect_docx.py reference/opponent-files/opponent-1AC-example.docx --cards` to see the cites and highlighted text yourself.
-
-## 5. A real blocks file (private reference)
-
-`reference/example-blocks/example-blocks-excerpt.docx`: about 6,000 words from a real team blocks file (15 blocks). Study its shape, then read the annotated walkthrough in `docs/what-good-looks-like.md`.
-
-```bash
-python tools/inspect_docx.py reference/example-blocks/example-blocks-excerpt.docx            # outline
-python tools/inspect_docx.py reference/example-blocks/example-blocks-excerpt.docx --cards    # cites + highlighted text
-python tools/lint_blocks.py reference/example-blocks/example-blocks-excerpt.docx             # should report 0 errors
-```
-
-What to notice: every block states the opposing argument, numbers its answers, puts a card under each tag, and ends with an analytic that links back or turns.
-
-## 6. Real opposing files (private reference)
-
-`reference/opponent-files/opponent-1AC-example.pdf` and `opponent-1NC-example.pdf`: real constructive files from other teams. Open the PDFs to see highlighting and shrinking. Study how a contention or off-case position is laid out and how much context their cards carry. Use `pdftotext` if you need the plain text.
-
-## 7. Test it on a fresh agent
+## 5. Test it on a fresh agent
 
 - `docs/agent-smoke-test.md`: a short hand test.
 - `docs/fresh-session-test-prompt.md`: a hard, multi-part prompt for a brand-new session (build blocks and a case), with a grading sheet.
-- `docs/fresh-session-test-prompt-2.md`: a harder one: answer a real opposing case using the user's own files as context, with a grading sheet.
 
 ## The mistakes to avoid (from a real test run)
 

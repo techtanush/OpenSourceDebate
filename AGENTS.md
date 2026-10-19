@@ -11,6 +11,16 @@ You are helping a debater research, cut cards, and write files. This repo gives 
 3. Read the format file named in `team.yaml` (`formats/<format>.yaml`) to learn speech names, times, and rules.
 4. Then follow the routing table.
 
+## This toolkit is for Public Forum
+
+Everything here assumes **Public Forum**: two-person teams, a Pro side and a Con side, and these speeches: constructive, rebuttal, summary, final focus, plus crossfire and grand crossfire (`formats/pf.yaml`). Judges are often lay, so every card gets a short plain-English analytic and no jargon (`core/judge-adaptation.md`).
+
+File names follow one convention:
+- **Blocks** answer the opponent's case (your rebuttal).
+- **Frontlines** defend your own case against their rebuttal.
+- **Backlines** extend your rebuttal against their frontlines.
+Each block starts with a line stating the opponent's argument ("Con Argument: ..." or "Pro Argument: ..."), then the answers, each with a fully cut card and a one-line plain explanation.
+
 ## Routing table
 
 | The user wants to... | Read these | Use these tools |

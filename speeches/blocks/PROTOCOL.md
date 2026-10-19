@@ -25,10 +25,10 @@ Read first: `core/integrity.md`, `core/cutting-rules.md`, `core/refutation-guide
 
 ## Block anatomy (follow this)
 
-This is the structure used in the example blocks in `reference/example-blocks/`. A block is read from during the round, so it is **self-contained**: it states the argument, gives the answers, and **contains the actual cut cards**.
+This is the structure strong team block files use. A block is read from during the round, so it is **self-contained**: it states the argument, gives the answers, and **contains the actual cut cards**.
 
 ```
-Block (Heading 3)   "AT: <opposing argument>"
+Block (Heading 3)   "AT: <the claim they make>"   (named for the claim, never for one card)
 Analytic            "<Opponent> Argument: <fair one-sentence statement of what they say>"
 Analytic            "1. <overview answer: the strongest short claim, often an empirical or no-link point>"
 Tag + cite + card   "2. <answer as a full argument sentence with its specifics>"
@@ -39,7 +39,7 @@ Analytic            "N. <closing link: why the resolution/plan does or doesn't c
 
 Rules:
 
-1. **Open with the opposing argument**, stated the way they would say it ("Aff Argument: ...", "Neg Argument: ...").
+1. **Open with the opposing argument**, stated the way they would say it ("Pro Argument: ...", "Con Argument: ..."). Every block has this line, including short ones. It tells the speaker, and anyone who opens the file cold, exactly what is being answered.
 2. **Every tagged answer has its own card.** Tag (the answer as a specific argument sentence), then the cite, then the card body with its surrounding context and sparse read text (`core/cutting-rules.md`). A Tag with no card under it is an error.
 3. **Analytics sit between and around cards. They never replace them.** Do not write "Extend X" or summarize a card that lives in another file. "Extend" is only for a card the debater already read in an earlier speech.
 4. **Number the answers** across tags and analytics (1, 2, 3...), so the speaker can say "number three."
@@ -54,7 +54,10 @@ A starter file is in `templates/block-skeleton.md`; a worked fictional example i
 
 - **One block per opposing argument.** Before making a block, search the existing files (`python tools/library.py search <folder> <keywords>`). If one exists, **merge** new cards into it; never create a duplicate.
 - **Keep the team's headings** if asked; add evidence under the existing heading.
-- **Prefer answers to their specific cards over takeouts.** Put a short, airtight takeout after the specific answers, if at all.
+- **Name every block for the claim, not for a card.** Use "AT: Car Bans Make Nearby Streets Slower", not "AT: Reyes 24". Cards change from round to round; the claim is what you answer. A title with an author, a year, or a parenthetical card name is a sign the block should be renamed and merged into the block for its claim.
+- **Build the general block first.** For each argument family (retail, access, traffic, and so on), write one general block that takes out the gist of the argument, then add claim-level blocks beneath it. Put each card-specific point inside the matching claim block as an answer about the claim ("the source sells power equipment", "the figure is a 2030 projection"), not as "Their X card says...". The speaker says the card's name in the round; the file does not need it.
+- **Keep takeouts short and airtight.** A broad takeout that sounds like a reach is worse than a tight answer to the claim.
+- **Never leave a tag with no card.** If you do not have a card yet, write the point as an analytic and mark the gap in your report; do not leave a tag standing alone.
 - **Lay judges:** a short plain analytic right after each card, with no labels, arrows, or jargon (`core/judge-adaptation.md`; `python tools/lint_blocks.py file --lay`).
 - **New evidence** goes into the library file first, then into the speech-ready blocks file; the user does the final trimming.
 
@@ -76,6 +79,7 @@ A starter file is in `templates/block-skeleton.md`; a worked fictional example i
 
 ## Quality checks
 
+- [ ] Block is named for the claim (no author, year, or card name in the title).
 - [ ] Opposing argument stated fairly at the top.
 - [ ] Answers ordered strongest first, each with a reason.
 - [ ] All cards verified (`verify_quotes.py`), cites complete (`lint_cites.py`), context present (`lint_cards.py`).

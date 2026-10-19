@@ -70,3 +70,12 @@ Short signposts help the judge follow the chain: "Scenario 1 is the economy," "T
 | Numbers in analytics appear in a card | Whether the whole case reads as one story |
 
 A passing lint is necessary, not sufficient. Always run the tag-story test and read it as a judge would.
+
+
+## Match your own case
+
+Before delivering blocks, frontlines, or backlines, read them against the team's own constructive cases (the ones the team actually reads in round). Check three things:
+
+1. **No card contradicts a constructive.** If the constructive says nearby streets get faster, a block must not use a card saying they get slower. If a card's headline says the opposite of the team's thesis, even when the quoted lines are safe, swap it.
+2. **Choose the story that fits both.** When two true stories exist (for example, traffic moves to nearby streets vs. traffic disappears), use the one the constructive uses, and keep the other out of every file the team will read from.
+3. **Strengthen, never weaken.** Fix a conflict by finding a better card for the same point, not by dropping the point.

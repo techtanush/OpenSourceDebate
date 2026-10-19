@@ -204,6 +204,26 @@ class LintCardsAndBlocksTests(unittest.TestCase):
         self.assertTrue(any("no cut cards" in m for _, m in levels))
         self.assertTrue(any("tag with no card" in m for _, m in levels))
 
+    def test_card_named_title_and_card_pointing_analytics_warn(self):
+        import lint_blocks
+        events = [("block", "AT: Reyes 24 (Pilot Streets Got Slower)"), ("analytic", "Pro Argument: X."),
+                  ("analytic", "Their own Reyes card says the pilot was short."),
+                  ("card", "1. Answer"), ("analytic", "Plain.")]
+        results, _ = lint_blocks.lint(events)
+        msgs = " | ".join(r[2] for r in results)
+        self.assertIn("title names a card", msgs)
+        self.assertIn("points at their card", msgs)
+
+    def test_claim_named_block_has_no_card_warning(self):
+        import lint_blocks
+        events = [("block", "AT: Car Bans Make Nearby Streets Slower"),
+                  ("analytic", "Pro Argument: X."), ("analytic", "1. Gas is chosen for speed."),
+                  ("card", "2. Answer"), ("analytic", "Plain.")]
+        results, _ = lint_blocks.lint(events)
+        msgs = " | ".join(r[2] for r in results)
+        self.assertNotIn("title names a card", msgs)
+        self.assertNotIn("points at their card", msgs)
+
     def test_missing_argument_statement_fails(self):
         import lint_blocks
         events = [("block", "A2: X"), ("card", "1. Answer"), ("analytic", "2. Closing.")]
@@ -505,7 +525,7 @@ class GoodVsBadAndReferencesTests(unittest.TestCase):
     def test_no_broken_repo_paths_in_docs(self):
         import glob
         import re
-        skip_dirs = ("/reference/", "/.git/", "/sources/", "/private-fixtures/")
+        skip_dirs = ("/.git/", "/sources/", "/private-fixtures/")
         generated = {"team.yaml", "library-index.md", "research-notes.md", "case.md", "case.docx",
                      "blocks.md", "blocks.docx", "rebuttal.md", "rebuttal.docx", "spec.md", "file.md",
                      "file.docx", "cards.md", "cards.docx", "out.docx", "out-DRAFT.docx",
